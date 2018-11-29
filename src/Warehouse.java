@@ -14,6 +14,8 @@ public class Warehouse {
     final static File PRIME_DAY_FILE = new File(folderPath + "PrimeDay.txt");
     final static double PRIME_DAY_DISCOUNT = .15;
 
+    boolean primeDay = false;
+
     /**
      * Main Method
      * 

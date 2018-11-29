@@ -36,7 +36,33 @@ public class Warehouse {
             try {
                 int optionNumber = Integer.parseInt(option);
                 if (optionNumber == 1){
-                    //TODO
+                    String packageID;
+                    String productName;
+                    double weight;
+                    double price;
+                    String buyerName;
+                    String address;
+                    String city;
+                    String state;
+                    int zip;
+                    System.out.println("Enter Package ID: ");
+                    packageID = s.nextLine();
+                    System.out.println("Enter Product Name: ");
+                    productName = s.nextLine();
+                    System.out.println("Enter Weight");
+                    weight = s.nextDouble();
+                    System.out.println("Enter Price: ");
+                    price = s.nextDouble();
+                    System.out.println("Enter Buyer Name: ");
+                    buyerName = s.nextLine();
+                    System.out.println("Enter Address: ");
+                    address = s.nextLine();
+                    System.out.println("Enter City: ");
+                    city = s.nextLine();
+                    System.out.println("Enter State: ");
+                    state = s.nextLine();
+                    System.out.println("Enter ZIP Code: ");
+                    zip = s.nextInt();
                 } else if (optionNumber == 2){
                     //TODO
                 } else if (optionNumber == 3){

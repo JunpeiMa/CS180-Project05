@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.Scanner;
 
 /**
  * <h1>Warehouse</h1>
@@ -26,6 +27,34 @@ public class Warehouse {
     	
     	
     	//2) Show menu and handle user inputs
+        String option = "0";
+        Scanner s = new Scanner(System.in);
+        while (option != "6") {
+            System.out.println("==========Options==========\n1) Add Package\n2) Add Vehicle\n3) Activate Prime Day" +
+                    "\n4)Send Vehicle\n5) Print Statistics\n6) Exit");
+            option = s.nextLine();
+            try {
+                int optionNumber = Integer.parseInt(option);
+                if (optionNumber == 1){
+                    //TODO
+                } else if (optionNumber == 2){
+                    //TODO
+                } else if (optionNumber == 3){
+                    //TODO
+                } else if (optionNumber == 4){
+                    //TODO
+                } else if (optionNumber == 5){
+                    //TODO
+                } else if (optionNumber == 6){
+                    //TODO
+                } else
+                {
+                    System.out.println("Error: Option not available.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Option not available.");
+            }
+        }
     	
     	
     	

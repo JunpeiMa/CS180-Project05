@@ -176,7 +176,7 @@ public class DatabaseManager {
     
     /**
      * Saves status of prime day to text file. If it is primeDay "1" will be
-     * writtern, otherwise "0" will be written.
+     * written, otherwise "0" will be written.
      * 
      * @param file     File to write profits to
      * @param primeDay Whether or not it is Prime Day

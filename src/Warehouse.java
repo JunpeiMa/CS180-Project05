@@ -65,6 +65,7 @@ public class Warehouse {
                     state = s.nextLine();
                     System.out.println("Enter ZIP Code: ");
                     zip = s.nextInt();
+                    ShippingAddress sa = new ShippingAddress(buyerName, address, city, state, zip);
                 } else if (optionNumber == 2){
                     //TODO
                 } else if (optionNumber == 3){

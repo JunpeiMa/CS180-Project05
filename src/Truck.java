@@ -75,7 +75,6 @@ public class Truck extends Vehicle {
      */
     @Override
     public String report() {
-        //TODO: Print Shipping Labels
         String output = "==========Truck Report==========\n" +
                 "License Plate No.: " + licensePlate + "\n" +
                 "Destination: " + zipDest + "\n" +

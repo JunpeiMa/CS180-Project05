@@ -41,7 +41,29 @@ public class CargoPlane extends Vehicle {
      */
     @Override
     public void fill(ArrayList<Package> warehousePackages) {
-    	//TODO
+        int range = 0;
+        boolean loop = true;
+        while (loop) {
+            for (Package p : warehousePackages) {
+                if (Math.abs(p.getDestination().getZipCode() - zipDest) == range) {
+                    if (currentWeight + p.getWeight() <= maxWeight) {
+                        packages.add(p);
+                    } else
+                    {
+                        loop = false;
+                        break;
+                    }
+                }
+            }
+            if (warehousePackages.isEmpty())
+            {
+                loop = false;
+            }
+            if (loop)
+            {
+                range++;
+            }
+        }
     }
 
     /*
@@ -64,8 +86,8 @@ public class CargoPlane extends Vehicle {
         for (Package p:
                 this.packages) {
             revenue += p.getPrice();
-            if (Math.abs(p.getDestination().getZipCode()) > maxRange)
-                maxRange = Math.abs(p.getDestination().getZipCode());
+            if (Math.abs(p.getDestination().getZipCode() - this.zipDest) > maxRange)
+                maxRange = Math.abs(p.getDestination().getZipCode() - this.zipDest);
         }
         return revenue - maxRange * GAS_RATE;
     }

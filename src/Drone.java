@@ -50,8 +50,8 @@ public class Drone extends Vehicle {
         for (Package p:
                 this.packages) {
             revenue += p.getPrice();
-            if (Math.abs(p.getDestination().getZipCode()) > maxRange)
-                maxRange = Math.abs(p.getDestination().getZipCode());
+            if (Math.abs(p.getDestination().getZipCode() - this.zipDest) > maxRange)
+                maxRange = Math.abs(p.getDestination().getZipCode() - this.zipDest);
         }
         return revenue - maxRange * GAS_RATE;
     }

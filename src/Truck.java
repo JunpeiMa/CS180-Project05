@@ -52,10 +52,10 @@ public class Truck extends Vehicle {
         double revenue = 0;
         int maxRange = 0;
         for (Package p:
-             this.packages) {
+                this.packages) {
             revenue += p.getPrice();
-            if (Math.abs(p.getDestination().getZipCode()) > maxRange)
-                maxRange = Math.abs(p.getDestination().getZipCode());
+            if (Math.abs(p.getDestination().getZipCode() - this.zipDest) > maxRange)
+                maxRange = Math.abs(p.getDestination().getZipCode() - this.zipDest);
         }
         return revenue - maxRange * GAS_RATE;
 

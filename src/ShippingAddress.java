@@ -3,13 +3,13 @@
  */
 public class ShippingAddress {
 
-    public String name;
-    public String address;
-    public String city;
-    public String state;
-    public int zipCode;
+    String name;
+    String address;
+    String city;
+    String state;
+    int zipCode;
 
-    public ShippingAddress () {
+    ShippingAddress () {
         this.name = "";
         this.address = "";
         this.city = "";
@@ -17,7 +17,7 @@ public class ShippingAddress {
         this.zipCode = 0;
     }
 
-    public ShippingAddress (String name, String address, String city, String state, int zipCode) {
+    ShippingAddress (String name, String address, String city, String state, int zipCode) {
         this.name = name;
         this.address = address;
         this.city = city;

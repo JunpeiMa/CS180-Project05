@@ -220,19 +220,44 @@ public class Vehicle implements Profitable {
      * @param warehousePackages List of packages to add from
      */
     public void fill(ArrayList<Package> warehousePackages) {
-        //TODO
+        int range = 0;
+        boolean loop = true;
+        while (loop) {
+            for (Package p : warehousePackages) {
+                if (Math.abs(p.getDestination().getZipCode() - zipDest) == range) {
+                    if (currentWeight + p.getWeight() <= maxWeight) {
+                        packages.add(p);
+                    } else
+                    {
+                        loop = false;
+                        break;
+                    }
+                }
+            }
+            if (warehousePackages.isEmpty())
+            {
+                loop = false;
+            }
+            if (loop)
+            {
+                range++;
+            }
+        }
     }
 
 
     @Override
     public double getProfit() {
-        //TODO
-        return 0;
+        double profit = 0.0;
+        for (Package p : packages)
+        {
+            profit += p.getPrice();
+        }
+        return profit;
     }
 
     @Override
     public String report() {
-        //TODO
         return null;
     }
 }

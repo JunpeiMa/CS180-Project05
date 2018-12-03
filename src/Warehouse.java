@@ -14,7 +14,7 @@ public class Warehouse {
     final static File PRIME_DAY_FILE = new File(folderPath + "PrimeDay.txt");
     final static double PRIME_DAY_DISCOUNT = .15;
 
-    boolean primeDay = false;
+    static boolean primeDay = false;
 
     /**
      * Main Method
@@ -65,7 +65,12 @@ public class Warehouse {
                     state = s.nextLine();
                     System.out.println("Enter ZIP Code: ");
                     zip = s.nextInt();
+                    if (primeDay)
+                    {
+                        price *= 0.85;
+                    }
                     ShippingAddress sa = new ShippingAddress(buyerName, address, city, state, zip);
+                    Package p = new Package(packageID, productName, weight, price, sa);
                 } else if (optionNumber == 2){
                     //TODO
                 } else if (optionNumber == 3){

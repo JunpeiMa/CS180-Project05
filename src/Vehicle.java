@@ -103,8 +103,12 @@ public class Vehicle implements Profitable {
      * @return current weight of all packages inside vehicle
      */
     public double getCurrentWeight() {
-        //TODO
-        return 0.0;
+        currentWeight = 0.0;
+        for (Package p:
+             this.packages) {
+            currentWeight += p.getWeight();
+        }
+        return currentWeight;
     }
     
     
@@ -162,8 +166,14 @@ public class Vehicle implements Profitable {
      * @return whether or not it was successful in adding the package
      */
     public boolean addPackage(Package pkg) {
-        //TODO
-        return false;
+        boolean isAdd = true;
+        if (this.currentWeight + pkg.getWeight() > this.maxWeight)
+            isAdd = false;
+        if (isAdd) {
+            this.packages.add(pkg);
+            return true;
+        } else
+            return false;
     }
 
     
@@ -175,7 +185,8 @@ public class Vehicle implements Profitable {
      * Clears vehicle of packages and resets its weight to zero
      */
     public void empty() {
-        //TODO
+        this.packages = new ArrayList <Package> ();
+        this.currentWeight = 0;
     }
     
     
@@ -190,8 +201,7 @@ public class Vehicle implements Profitable {
      * @return whether or not Vehicle is full
      */
     public boolean isFull() {
-        //TODO
-        return false;
+        return (this.getCurrentWeight() == this.maxWeight);
     }
 
     

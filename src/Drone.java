@@ -5,14 +5,18 @@ import java.util.ArrayList;
  */
 
 public class Drone extends Vehicle {
-
+    private String licensePlate;
+    private double maxWeight;
+    private double currentWeight;
+    private int zipDest;
+    private ArrayList<Package> packages;
     final private double GAS_RATE = 1.33;
     /**
      * Default Contructor 
      */
     //============================================================================
-    //TODO
-    
+    public Drone () {
+    }
     //============================================================================
 
     /**
@@ -23,7 +27,9 @@ public class Drone extends Vehicle {
      */
     //============================================================================
     //TODO
-    
+    public Drone (String licensePlate, double maxWeight) {
+        super(licensePlate, maxWeight);
+    }
     //============================================================================
 
     /*
@@ -39,8 +45,15 @@ public class Drone extends Vehicle {
      */
     @Override
     public double getProfit() {
-    	//TODO
-    	
+        double revenue = 0;
+        int maxRange = 0;
+        for (Package p:
+                this.packages) {
+            revenue += p.getPrice();
+            if (Math.abs(p.getDestination().getZipCode()) > maxRange)
+                maxRange = Math.abs(p.getDestination().getZipCode());
+        }
+        return revenue - maxRange * GAS_RATE;
     }
 
     /**
@@ -58,6 +71,7 @@ public class Drone extends Vehicle {
     @Override
     public String report() {
     	//TODO
+        return "";
     }
     
    

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * <h1>Vehicle</h1> Represents a vehicle
@@ -9,6 +10,7 @@ public class Vehicle implements Profitable {
     private double maxWeight;
     private double currentWeight;
     private int zipDest;
+    private int maxRange;
     private ArrayList<Package> packages;
 
 
@@ -221,6 +223,35 @@ public class Vehicle implements Profitable {
      */
     public void fill(ArrayList<Package> warehousePackages) {
         int range = 0;
+        zipDest = 0;
+        ArrayList warehouseZipcodes = new ArrayList<Integer>();
+        for (int i = 0; i < warehousePackages.size(); i++) {
+
+        }
+        int maxFrequency = 0;
+
+        //TODO: prompt user to choose a method
+
+        //for first index
+        zipDest = warehousePackages.get(0).getDestination().getZipCode();
+
+
+        //for mode
+        for (int i = 0; i < warehousePackages.size(); i++) {
+            if (warehousePackages.get(i) != null) {
+                warehouseZipcodes.add(warehousePackages.get(i).getDestination().getZipCode());
+            }
+        }
+        while(!warehousePackages.isEmpty()) {
+            if (maxFrequency < Collections.frequency(warehouseZipcodes, warehouseZipcodes.get(0))){
+                maxFrequency = Collections.frequency(warehouseZipcodes, warehouseZipcodes.get(0));
+                zipDest = (int) warehouseZipcodes.get(0);
+                warehouseZipcodes.remove(Integer.valueOf(zipDest));
+            }
+        }
+
+
+        //fill
         boolean loop = true;
         while (loop) {
             for (Package p : warehousePackages) {

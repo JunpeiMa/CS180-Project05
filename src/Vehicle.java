@@ -226,7 +226,7 @@ public class Vehicle implements Profitable {
         zipDest = 0;
         ArrayList warehouseZipcodes = new ArrayList<Integer>();
         for (int i = 0; i < warehousePackages.size(); i++) {
-
+            warehouseZipcodes.set(i, warehousePackages.get(i).getDestination().getZipCode());
         }
         int maxFrequency = 0;
 

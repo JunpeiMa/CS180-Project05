@@ -225,9 +225,9 @@ public class Vehicle implements Profitable {
         int range = 0;
         zipDest = 0;
         ArrayList warehouseZipcodes = new ArrayList<Integer>();
-        for (int i = 0; i < warehousePackages.size(); i++) {
-            warehouseZipcodes.set(i, warehousePackages.get(i).getDestination().getZipCode());
-        }
+//        for (int i = 0; i < warehousePackages.size(); i++) {
+//            warehouseZipcodes.set(i, warehousePackages.get(i).getDestination().getZipCode());
+//        }
         int maxFrequency = 0;
 
         //TODO: prompt user to choose a method
@@ -242,12 +242,13 @@ public class Vehicle implements Profitable {
                 warehouseZipcodes.add(warehousePackages.get(i).getDestination().getZipCode());
             }
         }
-        while(!warehousePackages.isEmpty()) {
+
+        while(!warehouseZipcodes.isEmpty()) {
             if (maxFrequency < Collections.frequency(warehouseZipcodes, warehouseZipcodes.get(0))){
                 maxFrequency = Collections.frequency(warehouseZipcodes, warehouseZipcodes.get(0));
                 zipDest = (int) warehouseZipcodes.get(0);
-                warehouseZipcodes.remove(Integer.valueOf(zipDest));
             }
+            warehouseZipcodes.remove(Integer.valueOf(zipDest));
         }
 
 

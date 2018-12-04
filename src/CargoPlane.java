@@ -89,6 +89,8 @@ public class CargoPlane extends Vehicle {
             if (Math.abs(p.getDestination().getZipCode() - this.zipDest) > maxRange)
                 maxRange = Math.abs(p.getDestination().getZipCode() - this.zipDest);
         }
+        if (maxRange % 10 != 0)
+        maxRange = (maxRange/10 + 1) * 10;
         return revenue - maxRange * GAS_RATE;
     }
 

@@ -257,8 +257,7 @@ public class Vehicle implements Profitable {
         while (loop) {
             for (Package p : warehousePackages) {
                 if (Math.abs(p.getDestination().getZipCode() - zipDest) == range) {
-                    if (currentWeight + p.getWeight() <= maxWeight) {
-                        packages.add(p);
+                    if (addPackage(p)) {
                     } else
                     {
                         loop = false;

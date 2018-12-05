@@ -20,6 +20,7 @@ public class Warehouse {
     static ArrayList<Vehicle> vehicles = new ArrayList<>();
     static ArrayList<Package> packages = new ArrayList<>();
     static int numPackage = 0;
+    static int packagesShipped = 0;
     static double profit = 0.0;
     /**
      * Main Method
@@ -147,11 +148,47 @@ public class Warehouse {
                         int vehicleOption = 0;
                         System.out.println("Options:\n1) Send Truck\n2) Send Drone\n3) Send Cargo Plane\n" +
                                 "4) Send First Available");
+                        boolean hasTruck = false;
+                        boolean hasDrone = false;
+                        boolean hasCargoPlane = false;
+
+                        for (Vehicle vehicle:
+                             vehicles) {
+                            if (vehicle.getClass().equals("Truck"))
+                                hasTruck = true;
+                            if (vehicle.getClass().equals("Drone"))
+                                hasDrone = true;
+                            if (vehicle.getClass().equals("CargoPlane"))
+                                hasCargoPlane = true;
+                        }
                         vehicleOption = s.nextInt();
+                        boolean typeExists = false;
+                        if (vehicleOption == 1)
+                        {
+                            if (hasTruck) {
+                                //TODO
+                            } else {
+                                System.out.println("Error: No vehicles of selected type are available.");
+                            }
+                        } else if (vehicleOption == 2) {
+                            if (hasDrone) {
+                                //TODO
+                            } else {
+                                System.out.println("Error: No vehicles of selected type are available.");
+                            }
+                        } else if (vehicleOption == 3) {
+                            if (hasCargoPlane) {
+                                //TODO
+                            } else {
+                                System.out.println("Error: No vehicles of selected type are available.");
+                            }
+                        } else if (vehicleOption == 4) {
+                            //TODO
+                        }
                     }
 
                 } else if (optionNumber == 5){
-                    //TODO: Print Statistics
+                    printStatisticsReport(profit, packagesShipped, numPackage);
                 } else if (optionNumber == 6){
                     //TODO: Handle exit and save to files
                 } else
@@ -173,5 +210,11 @@ public class Warehouse {
         DatabaseManager.savePrimeDay(PRIME_DAY_FILE, primeDay);
         DatabaseManager.saveProfit(PROFIT_FILE, profit);
 
+    }
+
+    public static void printStatisticsReport(double profits, int packagesShipped, int numberOfPackages) {
+        System.out.printf("==========Statistics==========\nProfits:                 $%.2f", profits);
+        System.out.println("Packages Shipped:                " + packagesShipped
+                + "\nPackages in Warehouse:           " + numberOfPackages);
     }
 }

@@ -135,7 +135,7 @@ public class Package {
     public String shippingLabel() {
         NumberFormat moneyFormat = NumberFormat.getCurrencyInstance();
         String border = "====================";
-    	return (border + "\nTO: " + destination.name + "\n" + destination.address + "\n" + destination.city + ", " +
+    	return (border + "\nTO: " + destination.getName() + "\n" + destination.address + "\n" + destination.city + ", " +
                 destination.state + ", " + destination.zipCode + "\nWeight:         " + weight + "\nPrice:        " +
                 moneyFormat.format(price) + "\nProduct:" + product + "\n" + border);
     }

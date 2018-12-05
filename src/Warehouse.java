@@ -109,13 +109,13 @@ public class Warehouse {
                             s.nextLine(); //Buffer
                             if (vehicleOption == 1) {
                                 Truck t = new Truck(licensePlate, maxWeight);
-                                trucks.add(t);
+                                vehicles.add(t);
                             } else if (vehicleOption == 2) {
                                 Drone d = new Drone(licensePlate, maxWeight);
-                                drones.add(d);
+                                vehicles.add(d);
                             } else if (vehicleOption == 3) {
                                 CargoPlane cp = new CargoPlane(licensePlate, maxWeight);
-                                planes.add(cp);
+                                vehicles.add(cp);
                             }
                         } else {
                             System.out.println("Error: Option not available.");
@@ -137,7 +137,17 @@ public class Warehouse {
                         primeDay = true;
                     }
                 } else if (optionNumber == 4){
-                    //TODO: Send Vehicle out for delivery
+                    if (vehicles.isEmpty()) {
+                        System.out.println("Error: No vehicles available.");
+                    } else if (packages.isEmpty()) {
+                        System.out.println("Error: No packages available.");
+                    } else {
+                        int vehicleOption = 0;
+                        System.out.println("Options:\n1) Send Truck\n2) Send Drone\n3) Send Cargo Plane\n" +
+                                "4) Send First Available");
+                        vehicleOption = s.nextInt();
+                    }
+
                 } else if (optionNumber == 5){
                     //TODO: Print Statistics
                 } else if (optionNumber == 6){
@@ -157,6 +167,4 @@ public class Warehouse {
     	
     
     }
-
-
 }

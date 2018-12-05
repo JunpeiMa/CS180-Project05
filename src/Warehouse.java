@@ -30,7 +30,6 @@ public class Warehouse {
     public static void main(String[] args) throws IOException {
     	
     	//1) load data (vehicle, packages, profits, packages shipped and primeday) from files using DatabaseManager
-        //TODO: Properly load files when booting.
         try {
             packages = DatabaseManager.loadPackages(PACKAGE_FILE);
             numPackage = DatabaseManager.loadPackagesShipped(N_PACKAGES_FILE);
@@ -166,31 +165,37 @@ public class Warehouse {
                         if (vehicleOption == 1)
                         {
                             if (hasTruck) {
-                                //TODO
+                                sendVehicleHandler(1);
                             } else {
                                 System.out.println("Error: No vehicles of selected type are available.");
                             }
                         } else if (vehicleOption == 2) {
                             if (hasDrone) {
-                                //TODO
+                                sendVehicleHandler(2);
                             } else {
                                 System.out.println("Error: No vehicles of selected type are available.");
                             }
                         } else if (vehicleOption == 3) {
                             if (hasCargoPlane) {
-                                //TODO
+                                sendVehicleHandler(3);
                             } else {
                                 System.out.println("Error: No vehicles of selected type are available.");
                             }
                         } else if (vehicleOption == 4) {
-                            //TODO
+                            if (vehicles.get(0).getClass().equals("Truck"))
+                            {
+                                sendVehicleHandler(1);
+                            } else if (vehicles.get(0).getClass().equals("Drone")) {
+                                sendVehicleHandler(2);
+                            } else if (vehicles.get(0).getClass().equals("CargoPlane")) {
+                                sendVehicleHandler(3);
+                            }
                         }
                     }
 
                 } else if (optionNumber == 5){
                     printStatisticsReport(profit, packagesShipped, numPackage);
                 } else if (optionNumber == 6){
-                    //TODO: Handle exit and save to files
                 } else
                 {
                     System.out.println("Error: Option not available.");
@@ -216,5 +221,9 @@ public class Warehouse {
         System.out.printf("==========Statistics==========\nProfits:                 $%.2f", profits);
         System.out.println("Packages Shipped:                " + packagesShipped
                 + "\nPackages in Warehouse:           " + numberOfPackages);
+    }
+
+    public static void sendVehicleHandler(int type) {
+
     }
 }

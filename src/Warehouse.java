@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -16,12 +17,10 @@ public class Warehouse {
     final static double PRIME_DAY_DISCOUNT = .15;
 
     static boolean primeDay = false;
-
+    static ArrayList<Vehicle> vehicles = new ArrayList<>();
     static ArrayList<Package> packages = new ArrayList<>();
-    static ArrayList<Truck> trucks = new ArrayList<>();
-    static ArrayList<Drone> drones = new ArrayList<>();
-    static ArrayList<CargoPlane> planes = new ArrayList<>();
-
+    static int numPackage = 0;
+    static double profit = 0.0;
     /**
      * Main Method
      * 
@@ -31,12 +30,18 @@ public class Warehouse {
     	
     	//1) load data (vehicle, packages, profits, packages shipped and primeday) from files using DatabaseManager
         //TODO: Properly load files when booting.
-    	
-    	
-    	//2) Show menu and handle user inputs
+        try {
+            packages = DatabaseManager.loadPackages(PACKAGE_FILE);
+            numPackage = DatabaseManager.loadPackagesShipped(N_PACKAGES_FILE);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //2) Show menu and handle user inputs
         String option = "0";
         Scanner s = new Scanner(System.in);
-        while (!option.equals("6")) {
+            while (!option.equals("6")) {
             if (primeDay) {
                 System.out.println("==========Options==========\n1) Add Package\n2) Add Vehicle\n3) Deactivate Prime Day" +
                         "\n4) Send Vehicle\n5) Print Statistics\n6) Exit\n===========================");

@@ -26,7 +26,7 @@ public class Warehouse {
      * 
      * @param args list of command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
     	
     	//1) load data (vehicle, packages, profits, packages shipped and primeday) from files using DatabaseManager
         //TODO: Properly load files when booting.
@@ -166,7 +166,12 @@ public class Warehouse {
     	
     	
     	//3) save data (vehicle, packages, profits, packages shipped and primeday) to files (overwriting them) using DatabaseManager
-    	
-    
+        //
+        DatabaseManager.savePackages(PACKAGE_FILE, packages);
+        DatabaseManager.saveVehicles(VEHICLE_FILE, vehicles);
+        DatabaseManager.savePackagesShipped(N_PACKAGES_FILE, numPackage);
+        DatabaseManager.savePrimeDay(PRIME_DAY_FILE, primeDay);
+        DatabaseManager.saveProfit(PROFIT_FILE, profit);
+
     }
 }

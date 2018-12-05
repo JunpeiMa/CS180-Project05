@@ -246,7 +246,7 @@ public class DatabaseManager {
         for (Package pkg:
              packages) {
             ShippingAddress sa = pkg.getDestination();
-            bri.write(pkg.getID() + "," + pkg.getProduct() + "," + pkg.getWeight() + "," + pkg.getPrice() + ", " + sa.getName() + "," + sa.getAddress() + ", " + sa.getCity() + ", " + sa.getState() + ", " + sa.getZipCode() + "\n");
+            bri.write(pkg.getID() + "," + pkg.getProduct() + "," + pkg.getWeight() + "," + pkg.getPrice() + "," + sa.getName() + "," + sa.getAddress() + "," + sa.getCity() + "," + sa.getState() + "," + sa.getZipCode() + "\n");
         }
 
         bri.close();

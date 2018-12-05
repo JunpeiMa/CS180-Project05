@@ -22,14 +22,14 @@ public class DatabaseManager {
      * @return ArrayList of vehicles
      */
     public static ArrayList<Vehicle> loadVehicles(File file) throws IOException {
-        FileReader fre = null;
-        BufferedReader bre = null;
+        FileReader fre;
+        BufferedReader bre;
         ArrayList<Vehicle> Vehicles = new ArrayList<>();
         try {
             fre = new FileReader(file);
             bre = new BufferedReader(fre);
         } catch (FileNotFoundException e) {
-            return new ArrayList<Vehicle>();
+            return new ArrayList<>();
         }
 
 
@@ -52,6 +52,8 @@ public class DatabaseManager {
             }
 
         }
+        bre.close();
+        fre.close();
         return Vehicles;
     }
 
@@ -77,21 +79,24 @@ public class DatabaseManager {
      * @return ArrayList of packages
      */
     public static ArrayList<Package> loadPackages(File file) throws IOException {
-        FileReader fre = null;
-        BufferedReader bre = null;
+        FileReader fre;
+        BufferedReader bre;
         ArrayList<Package> packages = new ArrayList<>();
         try {
             fre = new FileReader(file);
             bre = new BufferedReader(fre);
         } catch (FileNotFoundException e) {
-            return new ArrayList<Package>();
+            return new ArrayList<>();
         }
 
         String line;
         while ((line = bre.readLine()) != null) {
             String attributes[] = line.split(",");
-            packages.add(new Package(attributes[0],attributes[1], Double.parseDouble(attributes[2]), Double.parseDouble(attributes[3]), new ShippingAddress(attributes[4], attributes[5], attributes[6], attributes[7],Integer.parseInt(attributes[8]))));
+            packages.add(new Package(attributes[0], attributes[1], Double.parseDouble(attributes[2]), Double.parseDouble(attributes[3]), new ShippingAddress(attributes[4], attributes[5], attributes[6], attributes[7], Integer.parseInt(attributes[8]))));
         }
+
+        bre.close();
+        fre.close();
         return packages;
     }
 
@@ -115,6 +120,9 @@ public class DatabaseManager {
         }
 
         String line = bre.readLine();
+
+        bre.close();
+        fre.close();
         return Double.parseDouble(line);
     }
 
@@ -138,6 +146,9 @@ public class DatabaseManager {
             return 0;
         }
         String line = bre.readLine();
+
+        bre.close();
+        fre.close();
         return Integer.parseInt(line);
 
     }
@@ -163,9 +174,9 @@ public class DatabaseManager {
         }
 
         String line = bre.readLine();
-        if (line.equals("1"))
-            return true;
-        else return false;
+        bre.close();
+        fre.close();
+        return (line.equals("1"));
 
     }
 
@@ -182,8 +193,24 @@ public class DatabaseManager {
      * @param file     File to write vehicles to
      * @param vehicles ArrayList of vehicles to save to file
      */
-    public static void saveVehicles(File file, ArrayList<Vehicle> vehicles) {
-        //TODO
+    public static void saveVehicles(File file, ArrayList<Vehicle> vehicles) throws IOException {
+        FileWriter fri = null;
+        BufferedWriter bri = null;
+
+        try {
+            fri = new FileWriter(file,false);
+            bri = new BufferedWriter(fri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (Vehicle vehicle :
+                vehicles) {
+            bri.write(vehicle.getClass() + "," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
+        }
+
+        bri.close();
+        fri.close();
     }
 
 
@@ -205,8 +232,25 @@ public class DatabaseManager {
      * @param file     File to write packages to
      * @param packages ArrayList of packages to save to file
      */
-    public static void savePackages(File file, ArrayList<Package> packages) {
-        //TODO
+    public static void savePackages(File file, ArrayList<Package> packages) throws IOException {
+        FileWriter fri = null;
+        BufferedWriter bri = null;
+
+        try {
+            fri = new FileWriter(file,false);
+            bri = new BufferedWriter(fri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (Package pkg:
+             packages) {
+            ShippingAddress sa = pkg.getDestination();
+            bri.write(pkg.getID() + "," + pkg.getProduct() + "," + pkg.getWeight() + "," + pkg.getPrice() + ", " + sa.getName() + "," + sa.getAddress() + ", " + sa.getCity() + ", " + sa.getState() + ", " + sa.getZipCode() + "\n");
+        }
+
+        bri.close();
+        fri.close();
     }
 
 
@@ -217,8 +261,22 @@ public class DatabaseManager {
      * @param profit Total profits
      */
 
-    public static void saveProfit(File file, double profit) {
-        //TODO
+    public static void saveProfit(File file, double profit) throws IOException {
+
+        FileWriter fri = null;
+        BufferedWriter bri = null;
+
+        try {
+            fri = new FileWriter(file,false);
+            bri = new BufferedWriter(fri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        bri.write(String.valueOf(profit));
+
+        bri.close();
+        fri.close();
     }
 
 
@@ -229,8 +287,23 @@ public class DatabaseManager {
      * @param nPackages Number of packages shipped
      */
 
-    public static void savePackagesShipped(File file, int nPackages) {
-        //TODO
+    public static void savePackagesShipped(File file, int nPackages) throws IOException {
+
+        FileWriter fri = null;
+        BufferedWriter bri = null;
+
+        try {
+            fri = new FileWriter(file,false);
+            bri = new BufferedWriter(fri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        bri.write(String.valueOf(nPackages));
+
+        bri.close();
+        fri.close();
+
     }
 
 
@@ -242,7 +315,24 @@ public class DatabaseManager {
      * @param primeDay Whether or not it is Prime Day
      */
 
-    public static void savePrimeDay(File file, boolean primeDay) {
-        //TODO
+    public static void savePrimeDay(File file, boolean primeDay) throws IOException {
+
+        FileWriter fri = null;
+        BufferedWriter bri = null;
+
+        try {
+            fri = new FileWriter(file,false);
+            bri = new BufferedWriter(fri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(primeDay)
+        bri.write("1");
+        else
+            bri.write("0");
+
+        bri.close();
+        fri.close();
     }
 }

@@ -97,9 +97,11 @@ public class Warehouse {
                             int maxWeight = 0;
                             //Other params are to be edited later.
                             System.out.println("Enter License Plate No.");
+                            s.nextLine(); //Buffer
                             licensePlate = s.nextLine();
                             System.out.println("Enter Maximum Carry Weight:");
                             maxWeight = s.nextInt();
+                            s.nextLine(); //Buffer
                             if (vehicleOption == 1) {
                                 Truck t = new Truck(licensePlate, maxWeight);
                                 trucks.add(t);

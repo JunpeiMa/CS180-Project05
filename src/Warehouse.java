@@ -47,7 +47,7 @@ public class Warehouse {
             vehicles = DatabaseManager.loadVehicles(VEHICLE_FILE);
             profit = DatabaseManager.loadProfit(PROFIT_FILE);
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
 
         //2) Show menu and handle user inputs
@@ -214,11 +214,16 @@ public class Warehouse {
         //3) save data (vehicle, packages, profits, packages shipped and primeday) to files (overwriting them) using
         // DatabaseManager
         //
-        DatabaseManager.savePackages(PACKAGE_FILE, packages);
-        DatabaseManager.saveVehicles(VEHICLE_FILE, vehicles);
-        DatabaseManager.savePackagesShipped(N_PACKAGES_FILE, packagesShipped);
-        DatabaseManager.savePrimeDay(PRIME_DAY_FILE, primeDay);
-        DatabaseManager.saveProfit(PROFIT_FILE, profit);
+        try {
+            DatabaseManager.savePackages(PACKAGE_FILE, packages);
+            DatabaseManager.saveVehicles(VEHICLE_FILE, vehicles);
+            DatabaseManager.savePackagesShipped(N_PACKAGES_FILE, packagesShipped);
+            DatabaseManager.savePrimeDay(PRIME_DAY_FILE, primeDay);
+            DatabaseManager.saveProfit(PROFIT_FILE, profit);
+        } catch (IOException e)
+        {
+
+        }
 
     }
 

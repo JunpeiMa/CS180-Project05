@@ -91,8 +91,8 @@ public class DatabaseManager {
             while ((line = bre.readLine()) != null) {
                 String[] attributes = line.split(",");
                 packages.add(new Package(attributes[0], attributes[1], Double.parseDouble(attributes[2]),
-                        Double.parseDouble(attributes[3]), new ShippingAddress(attributes[4], attributes[5], attributes[6],
-                        attributes[7], Integer.parseInt(attributes[8]))));
+                        Double.parseDouble(attributes[3]), new ShippingAddress(attributes[4], attributes[5],
+                        attributes[6], attributes[7], Integer.parseInt(attributes[8]))));
             }
 
             bre.close();

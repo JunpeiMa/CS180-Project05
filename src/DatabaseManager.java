@@ -206,7 +206,12 @@ public class DatabaseManager {
 
         for (Vehicle vehicle :
                 vehicles) {
-            bri.write(vehicle.getClass() + "," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
+            if (vehicle.getClass().equals(Truck.class))
+                bri.write("Truck," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
+            if (vehicle.getClass().equals(CargoPlane.class))
+                bri.write("CargoPlane," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
+            if (vehicle.getClass().equals(Drone.class))
+                bri.write("Drone," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
         }
 
         bri.close();

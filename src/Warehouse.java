@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public class Warehouse {
-	final static String folderPath = "files/";
+    final static String folderPath = "files/";
     final static File VEHICLE_FILE = new File(folderPath + "VehicleList.csv");
     final static File PACKAGE_FILE = new File(folderPath + "PackageList.csv");
     final static File PROFIT_FILE = new File(folderPath + "Profit.txt");
@@ -22,14 +23,16 @@ public class Warehouse {
     static int numPackage = 0;
     static int packagesShipped = 0;
     static double profit = 0.0;
+    static Scanner s = new Scanner(System.in);
+
     /**
      * Main Method
-     * 
+     *
      * @param args list of command line arguments
      */
     public static void main(String[] args) throws IOException {
-    	
-    	//1) load data (vehicle, packages, profits, packages shipped and primeday) from files using DatabaseManager
+
+        //1) load data (vehicle, packages, profits, packages shipped and primeday) from files using DatabaseManager
         try {
             packages = DatabaseManager.loadPackages(PACKAGE_FILE);
             numPackage = DatabaseManager.loadPackagesShipped(N_PACKAGES_FILE);
@@ -42,20 +45,19 @@ public class Warehouse {
 
         //2) Show menu and handle user inputs
         String option = "0";
-        Scanner s = new Scanner(System.in);
-            while (!option.equals("6")) {
+//        Scanner s = new Scanner(System.in);
+        while (!option.equals("6")) {
             if (primeDay) {
                 System.out.println("==========Options==========\n1) Add Package\n2) Add Vehicle\n3) Deactivate Prime Day" +
                         "\n4) Send Vehicle\n5) Print Statistics\n6) Exit\n===========================");
-            } else
-            {
+            } else {
                 System.out.println("==========Options==========\n1) Add Package\n2) Add Vehicle\n3) Activate Prime Day" +
                         "\n4) Send Vehicle\n5) Print Statistics\n6) Exit\n===========================");
             }
             option = s.nextLine();
             try {
                 int optionNumber = Integer.parseInt(option);
-                if (optionNumber == 1){
+                if (optionNumber == 1) {
                     String packageID;
                     String productName;
                     double weight;
@@ -85,15 +87,14 @@ public class Warehouse {
                     System.out.println("Enter ZIP Code: ");
                     zip = s.nextInt();
                     s.nextLine(); //Buffer
-                    if (primeDay)
-                    {
+                    if (primeDay) {
                         price *= 0.85;
                     }
                     ShippingAddress sa = new ShippingAddress(buyerName, address, city, state, zip);
                     Package p = new Package(packageID, productName, weight, price, sa);
                     packages.add(p);
                     System.out.println("\n" + p.shippingLabel() + "\n");
-                } else if (optionNumber == 2){
+                } else if (optionNumber == 2) {
                     boolean valid = false;
                     while (!valid) {
                         System.out.println("Vehicle Options:\n1) Truck\n2) Drone\n3) Cargo Plane");
@@ -123,22 +124,19 @@ public class Warehouse {
                             System.out.println("Error: Option not available.");
                         }
                     }
-                } else if (optionNumber == 3){
-                    if (primeDay){
-                        for (Package p : packages)
-                        {
+                } else if (optionNumber == 3) {
+                    if (primeDay) {
+                        for (Package p : packages) {
                             p.setPrice(p.getPrice() / 0.85);
                         }
                         primeDay = false;
-                    } else
-                    {
-                        for (Package p : packages)
-                        {
+                    } else {
+                        for (Package p : packages) {
                             p.setPrice(p.getPrice() * 0.85);
                         }
                         primeDay = true;
                     }
-                } else if (optionNumber == 4){
+                } else if (optionNumber == 4) {
                     if (vehicles.isEmpty()) {
                         System.out.println("Error: No vehicles available.");
                     } else if (packages.isEmpty()) {
@@ -151,19 +149,18 @@ public class Warehouse {
                         boolean hasDrone = false;
                         boolean hasCargoPlane = false;
 
-                        for (Vehicle vehicle:
-                             vehicles) {
-                            if (vehicle.getClass().equals("Truck"))
+                        for (Vehicle vehicle :
+                                vehicles) {
+                            if (vehicle.getClass().equals(Truck.class))
                                 hasTruck = true;
-                            if (vehicle.getClass().equals("Drone"))
+                            if (vehicle.getClass().equals(Drone.class))
                                 hasDrone = true;
-                            if (vehicle.getClass().equals("CargoPlane"))
+                            if (vehicle.getClass().equals(CargoPlane.class))
                                 hasCargoPlane = true;
                         }
                         vehicleOption = s.nextInt();
                         boolean typeExists = false;
-                        if (vehicleOption == 1)
-                        {
+                        if (vehicleOption == 1) {
                             if (hasTruck) {
                                 sendVehicleHandler(1);
                             } else {
@@ -182,32 +179,29 @@ public class Warehouse {
                                 System.out.println("Error: No vehicles of selected type are available.");
                             }
                         } else if (vehicleOption == 4) {
-                            if (vehicles.get(0).getClass().equals("Truck"))
-                            {
+                            if (vehicles.get(0).getClass().equals(Truck.class)) {
                                 sendVehicleHandler(1);
-                            } else if (vehicles.get(0).getClass().equals("Drone")) {
+                            } else if (vehicles.get(0).getClass().equals(Drone.class)) {
                                 sendVehicleHandler(2);
-                            } else if (vehicles.get(0).getClass().equals("CargoPlane")) {
+                            } else if (vehicles.get(0).getClass().equals(CargoPlane.class)) {
                                 sendVehicleHandler(3);
                             }
                         }
                     }
 
-                } else if (optionNumber == 5){
+                } else if (optionNumber == 5) {
                     printStatisticsReport(profit, packagesShipped, numPackage);
-                } else if (optionNumber == 6){
-                } else
-                {
+                } else if (optionNumber == 6) {
+                } else {
                     System.out.println("Error: Option not available.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Error: Option not available.");
             }
         }
-    	
-    	
-    	
-    	//3) save data (vehicle, packages, profits, packages shipped and primeday) to files (overwriting them) using DatabaseManager
+
+
+        //3) save data (vehicle, packages, profits, packages shipped and primeday) to files (overwriting them) using DatabaseManager
         //
         DatabaseManager.savePackages(PACKAGE_FILE, packages);
         DatabaseManager.saveVehicles(VEHICLE_FILE, vehicles);
@@ -224,6 +218,67 @@ public class Warehouse {
     }
 
     public static void sendVehicleHandler(int type) {
+        Vehicle vehicleToSend = null;
+        if (type == 1) {
+            for (Vehicle vehicle:
+                    vehicles) {
+                if (vehicle.getClass().equals(Truck.class))
+                    vehicleToSend = vehicle;
+                break;
+            }
+        }
+        else if (type == 2) {
+            for (Vehicle vehicle:
+                    vehicles) {
+                if (vehicle.getClass().equals(Drone.class))
+                    vehicleToSend = vehicle;
+                break;
+            }
+        }
+
+        else if (type == 3) {
+            for (Vehicle vehicle:
+                    vehicles) {
+                if (vehicle.getClass().equals(CargoPlane.class))
+                    vehicleToSend = vehicle;
+                break;
+            }
+        }
+
+
+        ArrayList warehouseZipcodes = new ArrayList<Integer>();
+
+        int maxFrequency = 0;
+
+        System.out.println(
+                "ZIP Code Options:\n1) Send to first ZIP Code\n2) Send to mode of ZIP Codes");
+        int zipOption = s.nextInt();
+        s.nextLine();
+        if (zipOption == 1)
+            vehicleToSend.setZipDest(packages.get(0).getDestination().getZipCode());
+
+
+        else if (zipOption == 2)
+            for (int i = 0; i < packages.size(); i++) {
+                if (packages.get(i) != null) {
+                    warehouseZipcodes.add(packages.get(i).getDestination().getZipCode());
+                }
+            }
+
+        while(!warehouseZipcodes.isEmpty()) {
+            if (maxFrequency < Collections.frequency(warehouseZipcodes, warehouseZipcodes.get(0))){
+                maxFrequency = Collections.frequency(warehouseZipcodes, warehouseZipcodes.get(0));
+                vehicleToSend.setZipDest((int) warehouseZipcodes.get(0));
+            }
+            warehouseZipcodes.remove(Integer.valueOf(vehicleToSend.getZipDest()));
+        }
+
+        vehicleToSend.fill(packages);
+        profit += vehicleToSend.getProfit();
+        numPackage += vehicleToSend.getPackages().size();
+        vehicleToSend.report();
+        packages.removeAll(vehicleToSend.getPackages()); //Not sure if it removes packages that shouldn't ve removed;
+        vehicles.remove(vehicleToSend);
 
     }
 }

@@ -198,7 +198,7 @@ public class DatabaseManager {
         BufferedWriter bri = null;
 
         try {
-            fri = new FileWriter(file,false);
+            fri = new FileWriter(file, false);
             bri = new BufferedWriter(fri);
         } catch (IOException e) {
             e.printStackTrace();
@@ -242,14 +242,14 @@ public class DatabaseManager {
         BufferedWriter bri = null;
 
         try {
-            fri = new FileWriter(file,false);
+            fri = new FileWriter(file, false);
             bri = new BufferedWriter(fri);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        for (Package pkg:
-             packages) {
+        for (Package pkg :
+                packages) {
             ShippingAddress sa = pkg.getDestination();
             bri.write(pkg.getID() + "," + pkg.getProduct() + "," + pkg.getWeight() + "," + pkg.getPrice() + "," + sa.getName() + "," + sa.getAddress() + "," + sa.getCity() + "," + sa.getState() + "," + sa.getZipCode() + "\n");
         }
@@ -272,7 +272,7 @@ public class DatabaseManager {
         BufferedWriter bri = null;
 
         try {
-            fri = new FileWriter(file,false);
+            fri = new FileWriter(file, false);
             bri = new BufferedWriter(fri);
         } catch (IOException e) {
             e.printStackTrace();
@@ -298,7 +298,7 @@ public class DatabaseManager {
         BufferedWriter bri = null;
 
         try {
-            fri = new FileWriter(file,false);
+            fri = new FileWriter(file, false);
             bri = new BufferedWriter(fri);
         } catch (IOException e) {
             e.printStackTrace();
@@ -326,14 +326,14 @@ public class DatabaseManager {
         BufferedWriter bri = null;
 
         try {
-            fri = new FileWriter(file,false);
+            fri = new FileWriter(file, false);
             bri = new BufferedWriter(fri);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        if(primeDay)
-        bri.write("1");
+        if (primeDay)
+            bri.write("1");
         else
             bri.write("0");
 

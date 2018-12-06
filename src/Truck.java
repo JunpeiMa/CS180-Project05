@@ -16,7 +16,6 @@ public class Truck extends Vehicle {
      * Default Constructor
      */
     //============================================================================
-
     public Truck() {
     }
     //============================================================================
@@ -28,9 +27,8 @@ public class Truck extends Vehicle {
      * @param maxWeight    maximum weight that the vehicle can hold
      */
     //============================================================================
-
     public Truck(String licensePlate, double maxWeight) {
-        super (licensePlate, maxWeight);
+        super(licensePlate, maxWeight);
     }
 
     //============================================================================
@@ -51,7 +49,7 @@ public class Truck extends Vehicle {
     public double getProfit() {
         double revenue = 0;
         int maxRange = 0;
-        for (Package p:
+        for (Package p :
                 this.packages) {
             revenue += p.getPrice();
             if (Math.abs(p.getDestination().getZipCode() - this.zipDest) > maxRange)
@@ -78,10 +76,9 @@ public class Truck extends Vehicle {
         String output = "==========Truck Report==========\n" +
                 "License Plate No.: " + licensePlate + "\n" +
                 "Destination: " + zipDest + "\n" +
-                "Weight Load: " + String.format("%.2f",currentWeight) + "/" + String. format("%.2f", maxWeight) + "\n" +
+                "Weight Load: " + String.format("%.2f", currentWeight) + "/" + String.format("%.2f", maxWeight) + "\n" +
                 "Net Profit: $" + String.format("%.2f", this.getProfit()) + "\n=====Shipping Labels=====";
-        for (int i = 0; i < packages.size(); i++)
-        {
+        for (int i = 0; i < packages.size(); i++) {
             output += (packages.get(i).shippingLabel() + "\n");
         }
         output += "\n==============================";

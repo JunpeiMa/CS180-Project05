@@ -221,26 +221,23 @@ public class Warehouse {
     public static void sendVehicleHandler(int type) {
         Vehicle vehicleToSend = null;
         if (type == 1) {
-            for (Vehicle vehicle:
+            for (Vehicle vehicle :
                     vehicles) {
                 if (vehicle.getClass().equals(Truck.class)) {
                     vehicleToSend = vehicle;
                     break;
                 }
             }
-        }
-        else if (type == 2) {
-            for (Vehicle vehicle:
+        } else if (type == 2) {
+            for (Vehicle vehicle :
                     vehicles) {
                 if (vehicle.getClass().equals(Drone.class)) {
                     vehicleToSend = vehicle;
                     break;
                 }
             }
-        }
-
-        else if (type == 3) {
-            for (Vehicle vehicle:
+        } else if (type == 3) {
+            for (Vehicle vehicle :
                     vehicles) {
                 if (vehicle.getClass().equals(CargoPlane.class)) {
                     vehicleToSend = vehicle;
@@ -270,7 +267,7 @@ public class Warehouse {
             }
 
         for (int i = 0; i < warehouseZipcodes.size(); i++) {
-            if (maxFrequency < Collections.frequency(warehouseZipcodes, warehouseZipcodes.get(i))){
+            if (maxFrequency < Collections.frequency(warehouseZipcodes, warehouseZipcodes.get(i))) {
                 maxFrequency = Collections.frequency(warehouseZipcodes, warehouseZipcodes.get(i));
                 vehicleToSend.setZipDest((int) warehouseZipcodes.get(i));
             }

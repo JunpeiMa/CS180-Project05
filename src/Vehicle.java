@@ -226,24 +226,23 @@ public class Vehicle implements Profitable {
 
         //fill
         boolean loop = true;
+        while (loop) {
             for (Package p : warehousePackages) {
                 if (Math.abs(p.getDestination().getZipCode() - zipDest) == range) {
                     if (addPackage(p)) {
-                    } else
-                    {
+                    } else {
                         loop = false;
                         break;
                     }
                 }
             }
-            if (warehousePackages.isEmpty())
-            {
+            if (warehousePackages.isEmpty()) {
                 loop = false;
             }
-            if (loop)
-            {
+            if (loop) {
                 range++;
             }
+        }
     }
 
 

@@ -20,7 +20,7 @@ public class Warehouse {
     static boolean primeDay = false;
     static ArrayList<Vehicle> vehicles = new ArrayList<>();
     static ArrayList<Package> packages = new ArrayList<>();
-    static int numPackage = 0;
+    static int numPackage;
     static int packagesShipped = 0;
     static double profit = 0.0;
     static Scanner s = new Scanner(System.in);
@@ -47,6 +47,7 @@ public class Warehouse {
         String option = "0";
 //        Scanner s = new Scanner(System.in);
         while (!option.equals("6")) {
+            numPackage = packages.size();
             if (primeDay) {
                 System.out.println("==========Options==========\n1) Add Package\n2) Add Vehicle\n3) Deactivate Prime Day" +
                         "\n4) Send Vehicle\n5) Print Statistics\n6) Exit\n===========================");
@@ -205,7 +206,7 @@ public class Warehouse {
         //
         DatabaseManager.savePackages(PACKAGE_FILE, packages);
         DatabaseManager.saveVehicles(VEHICLE_FILE, vehicles);
-        DatabaseManager.savePackagesShipped(N_PACKAGES_FILE, numPackage);
+        DatabaseManager.savePackagesShipped(N_PACKAGES_FILE, packagesShipped);
         DatabaseManager.savePrimeDay(PRIME_DAY_FILE, primeDay);
         DatabaseManager.saveProfit(PROFIT_FILE, profit);
 
@@ -213,8 +214,8 @@ public class Warehouse {
 
     public static void printStatisticsReport(double profits, int packagesShipped, int numberOfPackages) {
         System.out.printf("==========Statistics==========\nProfits:                 $%.2f", profits);
-        System.out.println("Packages Shipped:                " + packagesShipped
-                + "\nPackages in Warehouse:           " + numberOfPackages);
+        System.out.println("\nPackages Shipped:                " + packagesShipped
+                + "\nPackages in Warehouse:           " + numberOfPackages + "\n==============================");
     }
 
     public static void sendVehicleHandler(int type) {
@@ -222,26 +223,29 @@ public class Warehouse {
         if (type == 1) {
             for (Vehicle vehicle:
                     vehicles) {
-                if (vehicle.getClass().equals(Truck.class))
+                if (vehicle.getClass().equals(Truck.class)) {
                     vehicleToSend = vehicle;
-                break;
+                    break;
+                }
             }
         }
         else if (type == 2) {
             for (Vehicle vehicle:
                     vehicles) {
-                if (vehicle.getClass().equals(Drone.class))
+                if (vehicle.getClass().equals(Drone.class)) {
                     vehicleToSend = vehicle;
-                break;
+                    break;
+                }
             }
         }
 
         else if (type == 3) {
             for (Vehicle vehicle:
                     vehicles) {
-                if (vehicle.getClass().equals(CargoPlane.class))
+                if (vehicle.getClass().equals(CargoPlane.class)) {
                     vehicleToSend = vehicle;
-                break;
+                    break;
+                }
             }
         }
 
@@ -265,12 +269,11 @@ public class Warehouse {
                 }
             }
 
-        while(!warehouseZipcodes.isEmpty()) {
-            if (maxFrequency < Collections.frequency(warehouseZipcodes, warehouseZipcodes.get(0))){
-                maxFrequency = Collections.frequency(warehouseZipcodes, warehouseZipcodes.get(0));
-                vehicleToSend.setZipDest((int) warehouseZipcodes.get(0));
+        for (int i = 0; i < warehouseZipcodes.size(); i++) {
+            if (maxFrequency < Collections.frequency(warehouseZipcodes, warehouseZipcodes.get(i))){
+                maxFrequency = Collections.frequency(warehouseZipcodes, warehouseZipcodes.get(i));
+                vehicleToSend.setZipDest((int) warehouseZipcodes.get(i));
             }
-            warehouseZipcodes.remove(Integer.valueOf(vehicleToSend.getZipDest()));
         }
 
         vehicleToSend.fill(packages);

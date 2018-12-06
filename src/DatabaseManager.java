@@ -3,13 +3,11 @@ import java.util.ArrayList;
 
 /**
  * Project 5 -- DatabaseManager
- *
+ * <p>
  * This class handles reading and writing to files on load and save, respectively.
  *
  * @author Kyle VandeWalle, Gloria Ma, lab sec 9
- *
  * @version December 6, 2018
- *
  */
 
 public class DatabaseManager {
@@ -34,33 +32,31 @@ public class DatabaseManager {
         try {
             fre = new FileReader(file);
             bre = new BufferedReader(fre);
-        } catch (FileNotFoundException e) {
+            String line;
+            while ((line = bre.readLine()) != null) {
+                String[] attributes = line.split(",");
+                String licensePlate = attributes[1];
+                double maxWeight = Double.parseDouble(attributes[2]);
+                if (attributes[0].equals("CargoPlane")) {
+                    vehicles.add(new CargoPlane(licensePlate, maxWeight));
+                }
+
+                if (attributes[0].equals("Truck")) {
+                    vehicles.add(new Truck(licensePlate, maxWeight));
+                }
+
+                if (attributes[0].equals("Drone")) {
+                    vehicles.add(new Drone(licensePlate, maxWeight));
+
+                }
+
+            }
+            bre.close();
+            fre.close();
+            return vehicles;
+        } catch (IOException e) {
             return new ArrayList<>();
         }
-
-
-        String line;
-        while ((line = bre.readLine()) != null) {
-            String[] attributes = line.split(",");
-            String licensePlate = attributes[1];
-            double maxWeight = Double.parseDouble(attributes[2]);
-            if (attributes[0].equals("CargoPlane")) {
-                vehicles.add(new CargoPlane(licensePlate, maxWeight));
-            }
-
-            if (attributes[0].equals("Truck")) {
-                vehicles.add(new Truck(licensePlate, maxWeight));
-            }
-
-            if (attributes[0].equals("Drone")) {
-                vehicles.add(new Drone(licensePlate, maxWeight));
-
-            }
-
-        }
-        bre.close();
-        fre.close();
-        return vehicles;
     }
 
 
@@ -91,21 +87,20 @@ public class DatabaseManager {
         try {
             fre = new FileReader(file);
             bre = new BufferedReader(fre);
-        } catch (FileNotFoundException e) {
+            String line;
+            while ((line = bre.readLine()) != null) {
+                String[] attributes = line.split(",");
+                packages.add(new Package(attributes[0], attributes[1], Double.parseDouble(attributes[2]),
+                        Double.parseDouble(attributes[3]), new ShippingAddress(attributes[4], attributes[5], attributes[6],
+                        attributes[7], Integer.parseInt(attributes[8]))));
+            }
+
+            bre.close();
+            fre.close();
+            return packages;
+        } catch (IOException e) {
             return new ArrayList<>();
         }
-
-        String line;
-        while ((line = bre.readLine()) != null) {
-            String[] attributes = line.split(",");
-            packages.add(new Package(attributes[0], attributes[1], Double.parseDouble(attributes[2]),
-                    Double.parseDouble(attributes[3]), new ShippingAddress(attributes[4], attributes[5], attributes[6],
-                    attributes[7], Integer.parseInt(attributes[8]))));
-        }
-
-        bre.close();
-        fre.close();
-        return packages;
     }
 
 
@@ -123,15 +118,14 @@ public class DatabaseManager {
         try {
             fre = new FileReader(file);
             bre = new BufferedReader(fre);
-        } catch (FileNotFoundException e) {
+            String line = bre.readLine();
+
+            bre.close();
+            fre.close();
+            return Double.parseDouble(line);
+        } catch (IOException e) {
             return 0.0;
         }
-
-        String line = bre.readLine();
-
-        bre.close();
-        fre.close();
-        return Double.parseDouble(line);
     }
 
 
@@ -150,14 +144,14 @@ public class DatabaseManager {
         try {
             fre = new FileReader(file);
             bre = new BufferedReader(fre);
-        } catch (FileNotFoundException e) {
+            String line = bre.readLine();
+
+            bre.close();
+            fre.close();
+            return Integer.parseInt(line);
+        } catch (IOException e) {
             return 0;
         }
-        String line = bre.readLine();
-
-        bre.close();
-        fre.close();
-        return Integer.parseInt(line);
 
     }
 
@@ -177,14 +171,13 @@ public class DatabaseManager {
         try {
             fre = new FileReader(file);
             bre = new BufferedReader(fre);
-        } catch (FileNotFoundException e) {
+            String line = bre.readLine();
+            bre.close();
+            fre.close();
+            return (line.equals("1"));
+        } catch (IOException e) {
             return false;
         }
-
-        String line = bre.readLine();
-        bre.close();
-        fre.close();
-        return (line.equals("1"));
 
     }
 
@@ -204,26 +197,25 @@ public class DatabaseManager {
     public static void saveVehicles(File file, ArrayList<Vehicle> vehicles) throws IOException {
         FileWriter fri = null;
         BufferedWriter bri = null;
-
         try {
             fri = new FileWriter(file, false);
             bri = new BufferedWriter(fri);
+
+            for (Vehicle vehicle :
+                    vehicles) {
+                if (vehicle.getClass().equals(Truck.class))
+                    bri.write("Truck," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
+                if (vehicle.getClass().equals(CargoPlane.class))
+                    bri.write("CargoPlane," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
+                if (vehicle.getClass().equals(Drone.class))
+                    bri.write("Drone," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
+            }
+
+            bri.close();
+            fri.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        for (Vehicle vehicle :
-                vehicles) {
-            if (vehicle.getClass().equals(Truck.class))
-                bri.write("Truck," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
-            if (vehicle.getClass().equals(CargoPlane.class))
-                bri.write("CargoPlane," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
-            if (vehicle.getClass().equals(Drone.class))
-                bri.write("Drone," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
-        }
-
-        bri.close();
-        fri.close();
     }
 
 
@@ -248,24 +240,22 @@ public class DatabaseManager {
     public static void savePackages(File file, ArrayList<Package> packages) throws IOException {
         FileWriter fri = null;
         BufferedWriter bri = null;
-
         try {
             fri = new FileWriter(file, false);
             bri = new BufferedWriter(fri);
+            for (Package pkg :
+                    packages) {
+                ShippingAddress sa = pkg.getDestination();
+                bri.write(pkg.getID() + "," + pkg.getProduct() + "," + pkg.getWeight() + "," + pkg.getPrice() + ","
+                        + sa.getName() + "," + sa.getAddress() + "," + sa.getCity() + "," + sa.getState() + "," +
+                        sa.getZipCode() + "\n");
+            }
+
+            bri.close();
+            fri.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        for (Package pkg :
-                packages) {
-            ShippingAddress sa = pkg.getDestination();
-            bri.write(pkg.getID() + "," + pkg.getProduct() + "," + pkg.getWeight() + "," + pkg.getPrice() + ","
-                    + sa.getName() + "," + sa.getAddress() + "," + sa.getCity() + "," + sa.getState() + "," +
-                    sa.getZipCode() + "\n");
-        }
-
-        bri.close();
-        fri.close();
     }
 
 
@@ -280,18 +270,15 @@ public class DatabaseManager {
 
         FileWriter fri = null;
         BufferedWriter bri = null;
-
         try {
             fri = new FileWriter(file, false);
             bri = new BufferedWriter(fri);
+            bri.write(String.valueOf(profit));
+            bri.close();
+            fri.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        bri.write(String.valueOf(profit));
-
-        bri.close();
-        fri.close();
     }
 
 
@@ -310,14 +297,14 @@ public class DatabaseManager {
         try {
             fri = new FileWriter(file, false);
             bri = new BufferedWriter(fri);
+
+            bri.write(String.valueOf(nPackages));
+
+            bri.close();
+            fri.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        bri.write(String.valueOf(nPackages));
-
-        bri.close();
-        fri.close();
 
     }
 
@@ -338,16 +325,15 @@ public class DatabaseManager {
         try {
             fri = new FileWriter(file, false);
             bri = new BufferedWriter(fri);
+            if (primeDay)
+                bri.write("1");
+            else
+                bri.write("0");
+
+            bri.close();
+            fri.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        if (primeDay)
-            bri.write("1");
-        else
-            bri.write("0");
-
-        bri.close();
-        fri.close();
     }
 }

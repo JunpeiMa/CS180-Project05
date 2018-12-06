@@ -1,5 +1,15 @@
 import java.util.ArrayList;
 
+/**
+ * Project 5 -- CargoPlane
+ *
+ * This class creates a CargoPlane that is a subclass of Vehicle.
+ *
+ * @author Kyle VandeWalle, lab sec 9
+ *
+ * @version December 6, 2018
+ *
+ */
 
 /**
  * <h1>CargoPlane</h1> Represents a Cargo Plane

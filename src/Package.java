@@ -1,6 +1,17 @@
 import java.text.NumberFormat;
 
 /**
+ * Project 5 -- Package
+ *
+ * This class creates a Package that is stored and used throughout the program.
+ *
+ * @author Kyle VandeWalle, lab sec 9
+ *
+ * @version December 6, 2018
+ *
+ */
+
+/**
  * <h1>Package</h1> Represents a package
  */
 public class Package {

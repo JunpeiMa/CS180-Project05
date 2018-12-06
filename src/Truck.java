@@ -1,5 +1,16 @@
 import java.util.ArrayList;
 
+/**
+ * Project 5 -- Truck
+ *
+ * This class creates a Truck that is a subclass of Vehicle.
+ *
+ * @author Kyle VandeWalle, lab sec 9
+ *
+ * @version December 6, 2018
+ *
+ */
+
 
 /**
  * <h1>Truck</h1> Represents a Truck

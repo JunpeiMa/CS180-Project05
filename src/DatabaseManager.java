@@ -2,6 +2,17 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
+ * Project 5 -- DatabaseManager
+ *
+ * This class handles reading and writing to files on load and save, respectively.
+ *
+ * @author Kyle VandeWalle, lab sec 9
+ *
+ * @version December 6, 2018
+ *
+ */
+
+/**
  * <h1>Database Manager</h1>
  * <p>
  * Used to locally save and retrieve data.

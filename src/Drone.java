@@ -1,6 +1,17 @@
 import java.util.ArrayList;
 
 /**
+ * Project 5 -- Drone
+ *
+ * This class creates a Drone that is a subclass of Vehicle.
+ *
+ * @author Kyle VandeWalle, lab sec 9
+ *
+ * @version December 6, 2018
+ *
+ */
+
+/**
  * <h1>Drone</h1> Represents a Drone
  */
 

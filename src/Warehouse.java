@@ -5,6 +5,17 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
+ * Project 5 -- Warehouse
+ *
+ * This class runs the program and handles variables used by other classes.
+ *
+ * @author Kyle VandeWalle, lab sec 9
+ *
+ * @version December 6, 2018
+ *
+ */
+
+/**
  * <h1>Warehouse</h1>
  */
 

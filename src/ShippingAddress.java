@@ -1,4 +1,15 @@
 /**
+ * Project 5 -- ShippingAddress
+ *
+ * This class creates a Shipping Address that is used for packages.
+ *
+ * @author Kyle VandeWalle, lab sec 9
+ *
+ * @version December 6, 2018
+ *
+ */
+
+/**
  * <h1>Shipping Address</h1> Represents a shipping address
  */
 public class ShippingAddress {

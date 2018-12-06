@@ -18,7 +18,7 @@ public class Drone extends Vehicle {
     private double currentWeight;
     private int zipDest;
     private ArrayList<Package> packages;
-    final private double gas_rate = 1.33;
+    final private double gasRate = 1.33;
 
     /**
      * Default Contructor
@@ -62,7 +62,7 @@ public class Drone extends Vehicle {
             if (Math.abs(p.getDestination().getZipCode() - this.zipDest) > maxRange)
                 maxRange = Math.abs(p.getDestination().getZipCode() - this.zipDest);
         }
-        return revenue - maxRange * gas_rate;
+        return revenue - maxRange * gasRate;
     }
 
     /**

@@ -17,7 +17,7 @@ public class CargoPlane extends Vehicle {
     private double currentWeight;
     private int zipDest;
     private ArrayList<Package> packages;
-    final double gas_rate = 2.33;
+    final double gasRate = 2.33;
 
     /**
      * Default Constructor
@@ -96,7 +96,7 @@ public class CargoPlane extends Vehicle {
         }
         if (maxRange % 10 != 0)
             maxRange = (maxRange / 10 + 1) * 10;
-        return revenue - maxRange * gas_rate;
+        return revenue - maxRange * gasRate;
     }
 
     /**

@@ -17,7 +17,7 @@ public class Truck extends Vehicle {
     private double currentWeight;
     private int zipDest;
     private ArrayList<Package> packages;
-    private final double gas_rate = 1.66;
+    private final double gasRate = 1.66;
 
     /**
      * Default Constructor
@@ -62,7 +62,7 @@ public class Truck extends Vehicle {
             if (Math.abs(p.getDestination().getZipCode() - this.zipDest) > maxRange)
                 maxRange = Math.abs(p.getDestination().getZipCode() - this.zipDest);
         }
-        return revenue - maxRange * gas_rate;
+        return revenue - maxRange * gasRate;
 
     }
 

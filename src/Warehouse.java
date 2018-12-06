@@ -9,23 +9,19 @@ import java.util.ArrayList;
  *
  * This class runs the program and handles variables used by other classes.
  *
- * @author Kyle VandeWalle, lab sec 9
+ * @author Kyle VandeWalle, Gloria Ma, lab sec 9
  *
  * @version December 6, 2018
  *
  */
 
-/**
- * <h1>Warehouse</h1>
- */
-
 public class Warehouse {
-    final static String folderPath = "files/";
-    final static File VEHICLE_FILE = new File(folderPath + "VehicleList.csv");
-    final static File PACKAGE_FILE = new File(folderPath + "PackageList.csv");
-    final static File PROFIT_FILE = new File(folderPath + "Profit.txt");
-    final static File N_PACKAGES_FILE = new File(folderPath + "NumberOfPackages.txt");
-    final static File PRIME_DAY_FILE = new File(folderPath + "PrimeDay.txt");
+    final static String FOLDER_PATH = "files/";
+    final static File VEHICLE_FILE = new File(FOLDER_PATH + "VehicleList.csv");
+    final static File PACKAGE_FILE = new File(FOLDER_PATH + "PackageList.csv");
+    final static File PROFIT_FILE = new File(FOLDER_PATH + "Profit.txt");
+    final static File N_PACKAGES_FILE = new File(FOLDER_PATH + "NumberOfPackages.txt");
+    final static File PRIME_DAY_FILE = new File(FOLDER_PATH + "PrimeDay.txt");
     final static double PRIME_DAY_DISCOUNT = .15;
 
     static boolean primeDay = false;
@@ -60,11 +56,13 @@ public class Warehouse {
         while (!option.equals("6")) {
             numPackage = packages.size();
             if (primeDay) {
-                System.out.println("==========Options==========\n1) Add Package\n2) Add Vehicle\n3) Deactivate Prime Day" +
-                        "\n4) Send Vehicle\n5) Print Statistics\n6) Exit\n===========================");
+                System.out.println("==========Options==========\n1) Add Package\n2) Add Vehicle\n" +
+                        "3) Deactivate Prime Day" + "\n4) Send Vehicle\n5) Print Statistics\n" +
+                        "6) Exit\n===========================");
             } else {
-                System.out.println("==========Options==========\n1) Add Package\n2) Add Vehicle\n3) Activate Prime Day" +
-                        "\n4) Send Vehicle\n5) Print Statistics\n6) Exit\n===========================");
+                System.out.println("==========Options==========\n1) Add Package\n2) Add Vehicle\n" +
+                        "3) Activate Prime Day" + "\n4) Send Vehicle\n5) Print Statistics\n6) Exit\n" +
+                        "===========================");
             }
             option = s.nextLine();
             try {
@@ -213,7 +211,8 @@ public class Warehouse {
         }
 
 
-        //3) save data (vehicle, packages, profits, packages shipped and primeday) to files (overwriting them) using DatabaseManager
+        //3) save data (vehicle, packages, profits, packages shipped and primeday) to files (overwriting them) using
+        // DatabaseManager
         //
         DatabaseManager.savePackages(PACKAGE_FILE, packages);
         DatabaseManager.saveVehicles(VEHICLE_FILE, vehicles);
@@ -223,9 +222,9 @@ public class Warehouse {
 
     }
 
-    public static void printStatisticsReport(double profits, int packagesShipped, int numberOfPackages) {
+    public static void printStatisticsReport(double profits, int packagesShip, int numberOfPackages) {
         System.out.printf("==========Statistics==========\nProfits:                 $%.2f", profits);
-        System.out.println("\nPackages Shipped:                " + packagesShipped
+        System.out.println("\nPackages Shipped:                " + packagesShip
                 + "\nPackages in Warehouse:           " + numberOfPackages + "\n==============================");
     }
 

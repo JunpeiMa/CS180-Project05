@@ -5,14 +5,10 @@ import java.util.Collections;
  *
  * This class creates a vehicle to deliver packages. Can be a Truck, Drone, or CargoPlane.
  *
- * @author Kyle VandeWalle, lab sec 9
+ * @author Kyle VandeWalle, Gloria Ma, lab sec 9
  *
  * @version December 6, 2018
  *
- */
-
-/**
- * <h1>Vehicle</h1> Represents a vehicle
  */
 
 public class Vehicle implements Profitable {

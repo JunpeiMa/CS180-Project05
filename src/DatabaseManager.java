@@ -6,17 +6,12 @@ import java.util.ArrayList;
  *
  * This class handles reading and writing to files on load and save, respectively.
  *
- * @author Kyle VandeWalle, lab sec 9
+ * @author Kyle VandeWalle, Gloria Ma, lab sec 9
  *
  * @version December 6, 2018
  *
  */
 
-/**
- * <h1>Database Manager</h1>
- * <p>
- * Used to locally save and retrieve data.
- */
 public class DatabaseManager {
 
     /**
@@ -35,7 +30,7 @@ public class DatabaseManager {
     public static ArrayList<Vehicle> loadVehicles(File file) throws IOException {
         FileReader fre;
         BufferedReader bre;
-        ArrayList<Vehicle> Vehicles = new ArrayList<>();
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
         try {
             fre = new FileReader(file);
             bre = new BufferedReader(fre);
@@ -50,22 +45,22 @@ public class DatabaseManager {
             String licensePlate = attributes[1];
             double maxWeight = Double.parseDouble(attributes[2]);
             if (attributes[0].equals("CargoPlane")) {
-                Vehicles.add(new CargoPlane(licensePlate, maxWeight));
+                vehicles.add(new CargoPlane(licensePlate, maxWeight));
             }
 
             if (attributes[0].equals("Truck")) {
-                Vehicles.add(new Truck(licensePlate, maxWeight));
+                vehicles.add(new Truck(licensePlate, maxWeight));
             }
 
             if (attributes[0].equals("Drone")) {
-                Vehicles.add(new Drone(licensePlate, maxWeight));
+                vehicles.add(new Drone(licensePlate, maxWeight));
 
             }
 
         }
         bre.close();
         fre.close();
-        return Vehicles;
+        return vehicles;
     }
 
 
@@ -102,8 +97,10 @@ public class DatabaseManager {
 
         String line;
         while ((line = bre.readLine()) != null) {
-            String attributes[] = line.split(",");
-            packages.add(new Package(attributes[0], attributes[1], Double.parseDouble(attributes[2]), Double.parseDouble(attributes[3]), new ShippingAddress(attributes[4], attributes[5], attributes[6], attributes[7], Integer.parseInt(attributes[8]))));
+            String[] attributes = line.split(",");
+            packages.add(new Package(attributes[0], attributes[1], Double.parseDouble(attributes[2]),
+                    Double.parseDouble(attributes[3]), new ShippingAddress(attributes[4], attributes[5], attributes[6],
+                    attributes[7], Integer.parseInt(attributes[8]))));
         }
 
         bre.close();
@@ -262,7 +259,9 @@ public class DatabaseManager {
         for (Package pkg :
                 packages) {
             ShippingAddress sa = pkg.getDestination();
-            bri.write(pkg.getID() + "," + pkg.getProduct() + "," + pkg.getWeight() + "," + pkg.getPrice() + "," + sa.getName() + "," + sa.getAddress() + "," + sa.getCity() + "," + sa.getState() + "," + sa.getZipCode() + "\n");
+            bri.write(pkg.getID() + "," + pkg.getProduct() + "," + pkg.getWeight() + "," + pkg.getPrice() + ","
+                    + sa.getName() + "," + sa.getAddress() + "," + sa.getCity() + "," + sa.getState() + "," +
+                    sa.getZipCode() + "\n");
         }
 
         bri.close();

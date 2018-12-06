@@ -5,23 +5,19 @@ import java.util.ArrayList;
  *
  * This class creates a Truck that is a subclass of Vehicle.
  *
- * @author Kyle VandeWalle, lab sec 9
+ * @author Kyle VandeWalle, Gloria Ma, lab sec 9
  *
  * @version December 6, 2018
  *
  */
 
-
-/**
- * <h1>Truck</h1> Represents a Truck
- */
 public class Truck extends Vehicle {
     private String licensePlate;
     private double maxWeight;
     private double currentWeight;
     private int zipDest;
     private ArrayList<Package> packages;
-    private final double GAS_RATE = 1.66;
+    private final double gas_rate = 1.66;
 
     /**
      * Default Constructor
@@ -66,7 +62,7 @@ public class Truck extends Vehicle {
             if (Math.abs(p.getDestination().getZipCode() - this.zipDest) > maxRange)
                 maxRange = Math.abs(p.getDestination().getZipCode() - this.zipDest);
         }
-        return revenue - maxRange * GAS_RATE;
+        return revenue - maxRange * gas_rate;
 
     }
 

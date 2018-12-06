@@ -5,15 +5,12 @@ import java.util.ArrayList;
  *
  * This class creates a Drone that is a subclass of Vehicle.
  *
- * @author Kyle VandeWalle, lab sec 9
+ * @author Kyle VandeWalle, Gloria Ma, lab sec 9
  *
  * @version December 6, 2018
  *
  */
 
-/**
- * <h1>Drone</h1> Represents a Drone
- */
 
 public class Drone extends Vehicle {
     private String licensePlate;
@@ -21,7 +18,7 @@ public class Drone extends Vehicle {
     private double currentWeight;
     private int zipDest;
     private ArrayList<Package> packages;
-    final private double GAS_RATE = 1.33;
+    final private double gas_rate = 1.33;
 
     /**
      * Default Contructor
@@ -38,7 +35,6 @@ public class Drone extends Vehicle {
      * @param maxWeight    maximum weight that the vehicle can hold
      */
     //============================================================================
-    //TODO
     public Drone(String licensePlate, double maxWeight) {
         super(licensePlate, maxWeight);
     }
@@ -66,7 +62,7 @@ public class Drone extends Vehicle {
             if (Math.abs(p.getDestination().getZipCode() - this.zipDest) > maxRange)
                 maxRange = Math.abs(p.getDestination().getZipCode() - this.zipDest);
         }
-        return revenue - maxRange * GAS_RATE;
+        return revenue - maxRange * gas_rate;
     }
 
     /**

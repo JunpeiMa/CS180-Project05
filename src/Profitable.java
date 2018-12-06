@@ -1,9 +1,14 @@
 /**
- * <h1>Profitable</h1>
- * <p>
- * This interface represents something that can be used to make a profit. Along
- * with returning total profits it must also be able to provide a report.
+ * Project 5 -- Profitable
+ *
+ * This interface creates methods used in other classes.
+ *
+ * @author Kyle VandeWalle, Gloria Ma, lab sec 9
+ *
+ * @version December 6, 2018
+ *
  */
+
 public interface Profitable {
 
     double getProfit();

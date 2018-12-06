@@ -5,22 +5,19 @@ import java.util.ArrayList;
  *
  * This class creates a CargoPlane that is a subclass of Vehicle.
  *
- * @author Kyle VandeWalle, lab sec 9
+ * @author Kyle VandeWalle, Gloria Ma, lab sec 9
  *
  * @version December 6, 2018
  *
  */
 
-/**
- * <h1>CargoPlane</h1> Represents a Cargo Plane
- */
 public class CargoPlane extends Vehicle {
     private String licensePlate;
     private double maxWeight;
     private double currentWeight;
     private int zipDest;
     private ArrayList<Package> packages;
-    final double GAS_RATE = 2.33;
+    final double gas_rate = 2.33;
 
     /**
      * Default Constructor
@@ -99,7 +96,7 @@ public class CargoPlane extends Vehicle {
         }
         if (maxRange % 10 != 0)
             maxRange = (maxRange / 10 + 1) * 10;
-        return revenue - maxRange * GAS_RATE;
+        return revenue - maxRange * gas_rate;
     }
 
     /**

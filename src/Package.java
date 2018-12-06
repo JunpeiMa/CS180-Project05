@@ -5,15 +5,12 @@ import java.text.NumberFormat;
  *
  * This class creates a Package that is stored and used throughout the program.
  *
- * @author Kyle VandeWalle, lab sec 9
+ * @author Kyle VandeWalle, Gloria Ma, lab sec 9
  *
  * @version December 6, 2018
  *
  */
 
-/**
- * <h1>Package</h1> Represents a package
- */
 public class Package {
     private String id;
     private String product;
@@ -129,8 +126,8 @@ public class Package {
     public String shippingLabel() {
         NumberFormat moneyFormat = NumberFormat.getCurrencyInstance();
         String border = "====================";
-        return (border + "\nTO: " + destination.getName() + "\n" + destination.address + "\n" + destination.city + ", " +
-                destination.state + ", " + destination.zipCode + "\nWeight:         " + weight + "\nPrice:        " +
+        return (border + "\nTO: " + destination.getName() + "\n" + destination.address + "\n" + destination.city + ", "
+                + destination.state + ", " + destination.zipCode + "\nWeight:         " + weight + "\nPrice:        " +
                 moneyFormat.format(price) + "\nProduct:" + product + "\n" + border);
     }
 

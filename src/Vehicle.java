@@ -103,7 +103,7 @@ public class Vehicle implements Profitable {
 
 
     /**
-     * Returns the current ZIP code desitnation of the vehicle
+     * Returns the current ZIP code destination of the vehicle
      *
      * @return current ZIP code destination of vehicle
      */
@@ -198,14 +198,11 @@ public class Vehicle implements Profitable {
             zipList.set(i, zipList.get(i) + zipDest);
         }
 
-        Outerloop:
+
         for (int zipCode : zipList) {
             for (Package p : warehousePackages) {
                 if (p.getDestination().getZipCode() == zipCode) {
-                    if (this.addPackage(p)) {
-                    } else {
-                        break Outerloop;
-                    }
+                    this.addPackage(p);
                 }
             }
         }

@@ -58,14 +58,11 @@ public class CargoPlane extends Vehicle {
             zipList.set(i, zipList.get(i) + zipDest);
         }
 
-        Outerloop:
+
         for (int zipCode : zipList) {
             for (Package p : warehousePackages) {
                 if (p.getDestination().getZipCode() == zipCode) {
-                    if (this.addPackage(p)) {
-                    } else {
-                        break Outerloop;
-                    }
+                    this.addPackage(p);
                 }
             }
         }
@@ -96,8 +93,6 @@ public class CargoPlane extends Vehicle {
             if (Math.abs(p.getDestination().getZipCode() - this.zipDest) > maxRange)
                 maxRange = Math.abs(p.getDestination().getZipCode() - this.zipDest);
         }
-        if (maxRange % 10 != 0)
-            maxRange = (maxRange / 10 + 1) * 10;
         return revenue - maxRange * gasRate;
     }
 

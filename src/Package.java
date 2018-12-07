@@ -125,8 +125,8 @@ public class Package {
         NumberFormat moneyFormat = NumberFormat.getCurrencyInstance();
         String border = "====================";
         return (border + "\nTO: " + destination.getName() + "\n" + destination.address + "\n" + destination.city + ", "
-                + destination.state + ", " + destination.zipCode + "\nWeight:         " + weight + "\nPrice:        " +
-                moneyFormat.format(price) + "\nProduct:" + product + "\n" + border);
+                + destination.state + ", " + destination.zipCode + "\nWeight:         " + String.format("%.2f", weight)
+                + "\nPrice:        " + moneyFormat.format(price) + "\nProduct:" + product + "\n" + border);
     }
 
 }

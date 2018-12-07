@@ -37,7 +37,7 @@ public class DatabaseManager {
                 String[] attributes = line.split(",");
                 String licensePlate = attributes[1];
                 double maxWeight = Double.parseDouble(attributes[2]);
-                if (attributes[0].equals("CargoPlane")) {
+                if (attributes[0].equals("Cargo Plane")) {
                     vehicles.add(new CargoPlane(licensePlate, maxWeight));
                 }
 
@@ -205,7 +205,7 @@ public class DatabaseManager {
                 if (vehicle.getClass().equals(Truck.class))
                     bri.write("Truck," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
                 if (vehicle.getClass().equals(CargoPlane.class))
-                    bri.write("CargoPlane," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
+                    bri.write("Cargo Plane," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
                 if (vehicle.getClass().equals(Drone.class))
                     bri.write("Drone," + vehicle.getLicensePlate() + "," + vehicle.getMaxWeight() + "\n");
             }

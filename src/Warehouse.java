@@ -47,7 +47,8 @@ public class Warehouse {
         String option = "0";
         int optionNumber = 0;
 //        Scanner s = new Scanner(System.in);
-        while (!option.equals("6")) {
+        boolean loop = true;
+        while (loop) {
             numPackage = packages.size();
             if (primeDay) {
                 System.out.println("==========Options==========\n1) Add Package\n2) Add Vehicle\n" +
@@ -58,7 +59,6 @@ public class Warehouse {
                         "3) Activate Prime Day" + "\n4) Send Vehicle\n5) Print Statistics\n6) Exit\n" +
                         "===========================");
             }
-//            option = s.nextLine();
             try {
                 optionNumber = s.nextInt();
                 s.nextLine();
@@ -212,6 +212,7 @@ public class Warehouse {
                 } else if (optionNumber == 5) {
                     printStatisticsReport(profit, packagesShipped, packages.size());
                 } else if (optionNumber == 6) {
+                    loop = false;
                 } else {
                     System.out.println("Error: Option not available.");
                 }
@@ -303,5 +304,4 @@ public class Warehouse {
 }
 
 //Fix saving and loading vehicles.
-//Fix whatever error there is for ShippingLabels
 //getCurrentWeight and getProfit for all subclasses of vehicle

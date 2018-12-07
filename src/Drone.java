@@ -56,6 +56,8 @@ public class Drone extends Vehicle {
     public double getProfit() {
         double revenue = 0;
         int maxRange = 0;
+        packages = getPackages();
+        zipDest = getZipDest();
         for (Package p :
                 this.packages) {
             revenue += p.getPrice();

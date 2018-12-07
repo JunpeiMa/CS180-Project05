@@ -1,18 +1,15 @@
 import java.io.File;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
  * Project 5 -- Warehouse
- *
+ * <p>
  * This class runs the program and handles variables used by other classes.
  *
  * @author Kyle VandeWalle, Gloria Ma, lab sec 9
- *
  * @version December 6, 2018
- *
  */
 
 public class Warehouse {
@@ -37,18 +34,14 @@ public class Warehouse {
      *
      * @param args list of command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         //1) load data (vehicle, packages, profits, packages shipped and primeday) from files using DatabaseManager
-        try {
-            packages = DatabaseManager.loadPackages(PACKAGE_FILE);
-            numPackage = DatabaseManager.loadPackagesShipped(N_PACKAGES_FILE);
-            primeDay = DatabaseManager.loadPrimeDay(PRIME_DAY_FILE);
-            vehicles = DatabaseManager.loadVehicles(VEHICLE_FILE);
-            profit = DatabaseManager.loadProfit(PROFIT_FILE);
-        } catch (IOException e) {
-
-        }
+        packages = DatabaseManager.loadPackages(PACKAGE_FILE);
+        numPackage = DatabaseManager.loadPackagesShipped(N_PACKAGES_FILE);
+        primeDay = DatabaseManager.loadPrimeDay(PRIME_DAY_FILE);
+        vehicles = DatabaseManager.loadVehicles(VEHICLE_FILE);
+        profit = DatabaseManager.loadProfit(PROFIT_FILE);
 
         //2) Show menu and handle user inputs
         String option = "0";
@@ -214,16 +207,11 @@ public class Warehouse {
         //3) save data (vehicle, packages, profits, packages shipped and primeday) to files (overwriting them) using
         // DatabaseManager
         //
-        try {
-            DatabaseManager.savePackages(PACKAGE_FILE, packages);
-            DatabaseManager.saveVehicles(VEHICLE_FILE, vehicles);
-            DatabaseManager.savePackagesShipped(N_PACKAGES_FILE, packagesShipped);
-            DatabaseManager.savePrimeDay(PRIME_DAY_FILE, primeDay);
-            DatabaseManager.saveProfit(PROFIT_FILE, profit);
-        } catch (IOException e)
-        {
-
-        }
+        DatabaseManager.savePackages(PACKAGE_FILE, packages);
+        DatabaseManager.saveVehicles(VEHICLE_FILE, vehicles);
+        DatabaseManager.savePackagesShipped(N_PACKAGES_FILE, packagesShipped);
+        DatabaseManager.savePrimeDay(PRIME_DAY_FILE, primeDay);
+        DatabaseManager.saveProfit(PROFIT_FILE, profit);
 
     }
 
@@ -289,6 +277,7 @@ public class Warehouse {
         }
 
         vehicleToSend.fill(packages);
+        packagesShipped += vehicleToSend.getPackages().size();
         profit += vehicleToSend.getProfit();
         numPackage += vehicleToSend.getPackages().size();
         vehicleToSend.report();

@@ -25,7 +25,7 @@ public class DatabaseManager {
      * @param file CSV File
      * @return ArrayList of vehicles
      */
-    public static ArrayList<Vehicle> loadVehicles(File file) throws IOException {
+    public static ArrayList<Vehicle> loadVehicles(File file) {
         FileReader fre;
         BufferedReader bre;
         ArrayList<Vehicle> vehicles = new ArrayList<>();
@@ -80,7 +80,7 @@ public class DatabaseManager {
      * @param file CSV File
      * @return ArrayList of packages
      */
-    public static ArrayList<Package> loadPackages(File file) throws IOException {
+    public static ArrayList<Package> loadPackages(File file) {
         FileReader fre;
         BufferedReader bre;
         ArrayList<Package> packages = new ArrayList<>();
@@ -111,7 +111,7 @@ public class DatabaseManager {
      * @param file file where profits are stored
      * @return profits from file
      */
-    public static double loadProfit(File file) throws IOException {
+    public static double loadProfit(File file) {
         FileReader fre;
         BufferedReader bre;
 
@@ -136,7 +136,7 @@ public class DatabaseManager {
      * @param file file where number of packages shipped are stored
      * @return number of packages shipped from file
      */
-    public static int loadPackagesShipped(File file) throws IOException {
+    public static int loadPackagesShipped(File file) {
 
         FileReader fre;
         BufferedReader bre;
@@ -163,7 +163,7 @@ public class DatabaseManager {
      * @param file file where prime day is stored
      * @return whether or not it is prime day
      */
-    public static boolean loadPrimeDay(File file) throws IOException {
+    public static boolean loadPrimeDay(File file) {
 
         FileReader fre;
         BufferedReader bre;
@@ -194,7 +194,7 @@ public class DatabaseManager {
      * @param file     File to write vehicles to
      * @param vehicles ArrayList of vehicles to save to file
      */
-    public static void saveVehicles(File file, ArrayList<Vehicle> vehicles) throws IOException {
+    public static void saveVehicles(File file, ArrayList<Vehicle> vehicles) {
         FileWriter fri = null;
         BufferedWriter bri = null;
         try {
@@ -237,7 +237,7 @@ public class DatabaseManager {
      * @param file     File to write packages to
      * @param packages ArrayList of packages to save to file
      */
-    public static void savePackages(File file, ArrayList<Package> packages) throws IOException {
+    public static void savePackages(File file, ArrayList<Package> packages) {
         FileWriter fri = null;
         BufferedWriter bri = null;
         try {
@@ -266,7 +266,7 @@ public class DatabaseManager {
      * @param profit Total profits
      */
 
-    public static void saveProfit(File file, double profit) throws IOException {
+    public static void saveProfit(File file, double profit) {
 
         FileWriter fri = null;
         BufferedWriter bri = null;
@@ -289,7 +289,7 @@ public class DatabaseManager {
      * @param nPackages Number of packages shipped
      */
 
-    public static void savePackagesShipped(File file, int nPackages) throws IOException {
+    public static void savePackagesShipped(File file, int nPackages) {
 
         FileWriter fri = null;
         BufferedWriter bri = null;
@@ -317,7 +317,7 @@ public class DatabaseManager {
      * @param primeDay Whether or not it is Prime Day
      */
 
-    public static void savePrimeDay(File file, boolean primeDay) throws IOException {
+    public static void savePrimeDay(File file, boolean primeDay) {
 
         FileWriter fri = null;
         BufferedWriter bri = null;

@@ -144,10 +144,11 @@ public class Vehicle implements Profitable {
      */
     public boolean addPackage(Package pkg) {
         boolean isAdd = true;
-        if (this.currentWeight + pkg.getWeight() > this.maxWeight)
+        if (currentWeight + pkg.getWeight() > maxWeight)
             isAdd = false;
         if (isAdd) {
-            this.packages.add(pkg);
+            packages.add(pkg);
+            currentWeight += pkg.getWeight();
             return true;
         } else
             return false;

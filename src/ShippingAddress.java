@@ -17,7 +17,7 @@ public class ShippingAddress {
     String state;
     int zipCode;
 
-    ShippingAddress() {
+    public ShippingAddress() {
         this.name = "";
         this.address = "";
         this.city = "";
@@ -25,7 +25,7 @@ public class ShippingAddress {
         this.zipCode = 0;
     }
 
-    ShippingAddress(String name, String address, String city, String state, int zipCode) {
+    public ShippingAddress(String name, String address, String city, String state, int zipCode) {
         this.name = name;
         this.address = address;
         this.city = city;

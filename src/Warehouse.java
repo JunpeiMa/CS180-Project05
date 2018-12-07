@@ -38,7 +38,7 @@ public class Warehouse {
 
         //1) load data (vehicle, packages, profits, packages shipped and primeday) from files using DatabaseManager
         packages = DatabaseManager.loadPackages(PACKAGE_FILE);
-        numPackage = DatabaseManager.loadPackagesShipped(N_PACKAGES_FILE);
+        packagesShipped = DatabaseManager.loadPackagesShipped(N_PACKAGES_FILE);
         primeDay = DatabaseManager.loadPrimeDay(PRIME_DAY_FILE);
         vehicles = DatabaseManager.loadVehicles(VEHICLE_FILE);
         profit = DatabaseManager.loadProfit(PROFIT_FILE);

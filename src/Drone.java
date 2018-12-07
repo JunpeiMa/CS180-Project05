@@ -2,22 +2,16 @@ import java.util.ArrayList;
 
 /**
  * Project 5 -- Drone
- *
+ * <p>
  * This class creates a Drone that is a subclass of Vehicle.
  *
  * @author Kyle VandeWalle, Gloria Ma, lab sec 9
- *
  * @version December 6, 2018
- *
  */
 
 
 public class Drone extends Vehicle {
-    private String licensePlate;
-    private double maxWeight;
-    private double currentWeight;
-    private int zipDest;
-    private ArrayList<Package> packages;
+    //    private ArrayList<Package> packages;
     final private double gasRate = 1.33;
 
     /**

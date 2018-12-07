@@ -1,22 +1,17 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Project 5 -- CargoPlane
- *
+ * <p>
  * This class creates a CargoPlane that is a subclass of Vehicle.
  *
  * @author Kyle VandeWalle, Gloria Ma, lab sec 9
- *
  * @version December 6, 2018
- *
  */
 
 public class CargoPlane extends Vehicle {
-    private String licensePlate;
-    private double maxWeight;
-    private double currentWeight;
-    private int zipDest;
-    private ArrayList<Package> packages;
+    //    private ArrayList<Package> packages;
     final double gasRate = 2.33;
 
     /**
@@ -49,24 +44,29 @@ public class CargoPlane extends Vehicle {
      */
     @Override
     public void fill(ArrayList<Package> warehousePackages) {
-        int range = 0;
-        boolean loop = true;
-        while (loop) {
+        ArrayList<Integer> zipList = new ArrayList<>();
+        for (Package p :
+                warehousePackages) {
+            int zipCode = p.getDestination().getZipCode() - zipDest;
+            if (!zipList.contains(zipCode))
+                zipList.add(zipCode);
+        }
+
+        zipList.sort(Comparator.comparingInt(Math::abs));
+
+        for (int i = 0; i < zipList.size(); i++) {
+            zipList.set(i, zipList.get(i) + zipDest);
+        }
+
+        Outerloop:
+        for (int zipCode : zipList) {
             for (Package p : warehousePackages) {
-                if (Math.abs(p.getDestination().getZipCode() - zipDest) == range) {
-                    if (currentWeight + p.getWeight() <= maxWeight) {
-                        packages.add(p);
+                if (p.getDestination().getZipCode() == zipCode) {
+                    if (this.addPackage(p)) {
                     } else {
-                        loop = false;
-                        break;
+                        break Outerloop;
                     }
                 }
-            }
-            if (warehousePackages.isEmpty()) {
-                loop = false;
-            }
-            if (loop) {
-                range++;
             }
         }
     }

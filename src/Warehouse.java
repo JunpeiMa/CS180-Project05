@@ -24,9 +24,9 @@ public class Warehouse {
     static boolean primeDay = false;
     static ArrayList<Vehicle> vehicles = new ArrayList<>();
     static ArrayList<Package> packages = new ArrayList<>();
-    static int numPackage;
     static int packagesShipped = 0;
     static double profit = 0.0;
+    static int numPackage;
     static Scanner s = new Scanner(System.in);
 
     /**
@@ -45,6 +45,7 @@ public class Warehouse {
 
         //2) Show menu and handle user inputs
         String option = "0";
+        int optionNumber = 0;
 //        Scanner s = new Scanner(System.in);
         while (!option.equals("6")) {
             numPackage = packages.size();
@@ -57,9 +58,10 @@ public class Warehouse {
                         "3) Activate Prime Day" + "\n4) Send Vehicle\n5) Print Statistics\n6) Exit\n" +
                         "===========================");
             }
-            option = s.nextLine();
+//            option = s.nextLine();
             try {
-                int optionNumber = Integer.parseInt(option);
+                optionNumber = s.nextInt();
+                s.nextLine();
                 if (optionNumber == 1) {
                     String packageID;
                     String productName;
@@ -145,9 +147,6 @@ public class Warehouse {
                     } else if (packages.isEmpty()) {
                         System.out.println("Error: No packages available.");
                     } else {
-                        int vehicleOption = 0;
-                        System.out.println("Options:\n1) Send Truck\n2) Send Drone\n3) Send Cargo Plane\n" +
-                                "4) Send First Available");
                         boolean hasTruck = false;
                         boolean hasDrone = false;
                         boolean hasCargoPlane = false;
@@ -161,39 +160,57 @@ public class Warehouse {
                             if (vehicle.getClass().equals(CargoPlane.class))
                                 hasCargoPlane = true;
                         }
+
+                        int vehicleOption = 0;
+                        System.out.println("Options:\n1) Send Truck\n2) Send Drone\n3) Send Cargo Plane\n" +
+                                "4) Send First Available");
                         vehicleOption = s.nextInt();
-                        boolean typeExists = false;
+
                         if (vehicleOption == 1) {
                             if (hasTruck) {
-                                sendVehicleHandler(1);
+                                System.out.println(
+                                        "ZIP Code Options:\n1) Send to first ZIP Code\n2) Send to mode of ZIP Codes");
+                                s.nextLine();
+                                int zipOption = s.nextInt();
+                                sendVehicleHandler(1, zipOption);
                             } else {
                                 System.out.println("Error: No vehicles of selected type are available.");
                             }
                         } else if (vehicleOption == 2) {
                             if (hasDrone) {
-                                sendVehicleHandler(2);
+                                System.out.println(
+                                        "ZIP Code Options:\n1) Send to first ZIP Code\n2) Send to mode of ZIP Codes");
+                                s.nextLine();
+                                int zipOption = s.nextInt();
+                                sendVehicleHandler(2, zipOption);
                             } else {
                                 System.out.println("Error: No vehicles of selected type are available.");
                             }
                         } else if (vehicleOption == 3) {
                             if (hasCargoPlane) {
-                                sendVehicleHandler(3);
+                                System.out.println(
+                                        "ZIP Code Options:\n1) Send to first ZIP Code\n2) Send to mode of ZIP Codes");
+                                int zipOption = s.nextInt();
+                                sendVehicleHandler(3, zipOption);
                             } else {
                                 System.out.println("Error: No vehicles of selected type are available.");
                             }
                         } else if (vehicleOption == 4) {
+                            System.out.println(
+                                    "ZIP Code Options:\n1) Send to first ZIP Code\n2) Send to mode of ZIP Codes");
+                            int zipOption = s.nextInt();
                             if (vehicles.get(0).getClass().equals(Truck.class)) {
-                                sendVehicleHandler(1);
+                                sendVehicleHandler(1, zipOption);
                             } else if (vehicles.get(0).getClass().equals(Drone.class)) {
-                                sendVehicleHandler(2);
+                                sendVehicleHandler(2, zipOption);
                             } else if (vehicles.get(0).getClass().equals(CargoPlane.class)) {
-                                sendVehicleHandler(3);
+                                sendVehicleHandler(3, zipOption);
                             }
                         }
                     }
 
                 } else if (optionNumber == 5) {
-                    printStatisticsReport(profit, packagesShipped, numPackage);
+                    printStatisticsReport(profit, packagesShipped, packages.size());
                 } else if (optionNumber == 6) {
                 } else {
                     System.out.println("Error: Option not available.");
@@ -221,7 +238,7 @@ public class Warehouse {
                 + "\nPackages in Warehouse:           " + numberOfPackages + "\n==============================");
     }
 
-    public static void sendVehicleHandler(int type) {
+    public static void sendVehicleHandler(int type, int zipOption) {
         Vehicle vehicleToSend = null;
         if (type == 1) {
             for (Vehicle vehicle :
@@ -254,10 +271,6 @@ public class Warehouse {
 
         int maxFrequency = 0;
 
-        System.out.println(
-                "ZIP Code Options:\n1) Send to first ZIP Code\n2) Send to mode of ZIP Codes");
-        int zipOption = s.nextInt();
-        s.nextLine();
         if (zipOption == 1)
             vehicleToSend.setZipDest(packages.get(0).getDestination().getZipCode());
 
@@ -279,9 +292,11 @@ public class Warehouse {
         vehicleToSend.fill(packages);
         packagesShipped += vehicleToSend.getPackages().size();
         profit += vehicleToSend.getProfit();
-        numPackage += vehicleToSend.getPackages().size();
-        vehicleToSend.report();
-        packages.removeAll(vehicleToSend.getPackages()); //Not sure if it removes packages that shouldn't ve removed;
+        System.out.println(vehicleToSend.report());
+        for (Package p :
+                vehicleToSend.getPackages()) {
+            packages.remove(p);
+        } //Not sure if it removes packages that shouldn't ve removed;
         vehicles.remove(vehicleToSend);
 
     }

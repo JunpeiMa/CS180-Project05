@@ -2,21 +2,19 @@ import java.util.ArrayList;
 
 /**
  * Project 5 -- Truck
- *
+ * <p>
  * This class creates a Truck that is a subclass of Vehicle.
  *
  * @author Kyle VandeWalle, Gloria Ma, lab sec 9
- *
  * @version December 6, 2018
- *
  */
 
 public class Truck extends Vehicle {
-    private String licensePlate;
-    private double maxWeight;
-    private double currentWeight;
-    private int zipDest;
-    private ArrayList<Package> packages;
+    //    private String licensePlate;
+//    private double maxWeight;
+//    private double currentWeight;
+//    private int zipDest;
+//    private ArrayList<Package> packages;
     private final double gasRate = 1.66;
 
     /**

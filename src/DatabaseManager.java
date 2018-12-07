@@ -47,7 +47,6 @@ public class DatabaseManager {
 
                 if (attributes[0].equals("Drone")) {
                     vehicles.add(new Drone(licensePlate, maxWeight));
-
                 }
 
             }

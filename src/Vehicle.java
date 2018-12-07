@@ -1,23 +1,20 @@
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
+
 /**
  * Project 5 -- Vehicle
- *
+ * <p>
  * This class creates a vehicle to deliver packages. Can be a Truck, Drone, or CargoPlane.
  *
  * @author Kyle VandeWalle, Gloria Ma, lab sec 9
- *
  * @version December 6, 2018
- *
  */
 
 public class Vehicle implements Profitable {
-    private String licensePlate;
-    private double maxWeight;
-    private double currentWeight;
-    private int zipDest;
-    private int maxRange;
-    private ArrayList<Package> packages;
+    String licensePlate;
+    double maxWeight;
+    double currentWeight;
+    int zipDest;
+    ArrayList<Package> packages;
 
 
     /**
@@ -185,26 +182,31 @@ public class Vehicle implements Profitable {
      *
      * @param warehousePackages List of packages to add from
      */
-    public void fill(ArrayList<Package> warehousePackages) {
-        int range = 0;
 
-        //fill
-        boolean loop = true;
-        while (loop) {
+    public void fill(ArrayList<Package> warehousePackages) {
+        ArrayList<Integer> zipList = new ArrayList<>();
+        for (Package p :
+                warehousePackages) {
+            int zipCode = p.getDestination().getZipCode() - zipDest;
+            if (!zipList.contains(zipCode))
+                zipList.add(zipCode);
+        }
+
+        zipList.sort(Comparator.comparingInt(Math::abs));
+
+        for (int i = 0; i < zipList.size(); i++) {
+            zipList.set(i, zipList.get(i) + zipDest);
+        }
+
+        Outerloop:
+        for (int zipCode : zipList) {
             for (Package p : warehousePackages) {
-                if (Math.abs(p.getDestination().getZipCode() - zipDest) == range) {
-                    if (addPackage(p)) {
+                if (p.getDestination().getZipCode() == zipCode) {
+                    if (this.addPackage(p)) {
                     } else {
-                        loop = false;
-                        break;
+                        break Outerloop;
                     }
                 }
-            }
-            if (warehousePackages.isEmpty()) {
-                loop = false;
-            }
-            if (loop) {
-                range++;
             }
         }
     }

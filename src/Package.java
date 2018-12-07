@@ -2,13 +2,11 @@ import java.text.NumberFormat;
 
 /**
  * Project 5 -- Package
- *
+ * <p>
  * This class creates a Package that is stored and used throughout the program.
  *
  * @author Kyle VandeWalle, Gloria Ma, lab sec 9
- *
  * @version December 6, 2018
- *
  */
 
 public class Package {

@@ -121,7 +121,7 @@ public class CargoPlane extends Vehicle {
                 "License Plate No.: " + licensePlate + "\n" +
                 "Destination: " + zipDest + "\n" +
                 "Weight Load: " + String.format("%.2f", currentWeight) + "/" + String.format("%.2f", maxWeight) + "\n" +
-                "Net Profit: $" + String.format("%.2f", this.getProfit()) + "\n=====Shipping Labels=====";
+                "Net Profit: $" + String.format("%.2f", this.getProfit()) + "\n=====Shipping Labels=====\n";
         for (int i = 0; i < packages.size(); i++) {
             output += (packages.get(i).shippingLabel() + "\n");
         }

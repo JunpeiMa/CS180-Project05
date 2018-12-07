@@ -286,3 +286,7 @@ public class Warehouse {
 
     }
 }
+
+//TODO: Fix saving and loading vehicles.
+//TODO: Fix whatever error there is for ShippingLables
+//TODO: getCurrentWeight for all subclasses of vehicle
